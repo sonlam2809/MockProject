@@ -1,0 +1,85 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row" style="font-size: 16px">
+
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+        <div class="row" style="background-color: white">
+
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h3>THÊM SÁCH MỚI</h3>
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h3>Vui lòng điền đầy đủ thông tin trước khi tạo</h3>
+          </div>
+
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <form class="example-form">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Tựa sách" value="" style="font-size: 16px">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Mô tả" value="">
+              </mat-form-field>
+              <mat-form-field>
+                <mat-select [(value)]="selectedDanhMuc">
+                  <mat-option value="">Chọn danh mục</mat-option>
+                  <mat-option value="option1">Option 1</mat-option>
+                  <mat-option value="option2">Option 2</mat-option>
+                  <mat-option value="option3">Option 3</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-select [(value)]="selectedTacGia">
+                  <mat-option value="">Chọn tác giả</mat-option>
+                  <mat-option value="option1">Option 1</mat-option>
+                  <mat-option value="option2">Option 2</mat-option>
+                  <mat-option value="option3">Option 3</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-select [(value)]="selectedNhaXuatBan">
+                  <mat-option value="">Chọn nhà xuất bản</mat-option>
+                  <mat-option value="option1">Option 1</mat-option>
+                  <mat-option value="option2">Option 2</mat-option>
+                  <mat-option value="option3">Option 3</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Giá" value="">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Số lượng" value="">
+              </mat-form-field>
+              <mat-form-field>
+                <mat-select [(value)]="selectedTrangThai">
+                  <mat-option value="">Trạng thái</mat-option>
+                  <mat-option value="option1">Option 1</mat-option>
+                  <mat-option value="option2">Option 2</mat-option>
+                  <mat-option value="option3">Option 3</mat-option>
+                </mat-select>
+              </mat-form-field>
+              
+              <div class="row">
+                  <button type="button" class="btn btn-danger btn-lg" (click)="OnBackClick()"><span class="glyphicon glyphicon-arrow-left"></span> Quay lại</button>
+                  <button type="button" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-arrow-right"></span> Tạo</button>
+              </div>
+              
+            </form>
+          </div>
+
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            
+            <img src="src/app/images/sach1.jpg" class="img-responsive" alt="Image">
+            <a href="#" class="btn btn-primary btn-lg">Thêm hình</a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
