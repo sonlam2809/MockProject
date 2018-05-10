@@ -25,7 +25,7 @@ export class AuthorListComponent implements OnInit {
   ngOnInit() {
   }
   onAddAuthorClick() {
-    console.log('click');
+    //console.log('click');
     this.router.navigateByUrl('/add-new-author');
   }
 

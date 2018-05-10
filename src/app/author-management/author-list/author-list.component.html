@@ -1,58 +1,64 @@
 <div class="main-content">
-  <div class="container-fluid">
-    <div class="row">
-
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <h3>
-          Quản lý Tác giả
-        </h3>
-      </div>
-
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <button kendoButton (click)="onAddAuthorClick()" [primary]=true data-toggle="modal" data-target="#exampleModalCenter">Thêm tác giả</button>
-      </div>
-
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="row">
-
-          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-            <kendo-combobox [data]="listItems" [value]="'Basketball'">
-            </kendo-combobox>
-          </div>
-
-          <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-            <!-- Search form -->
-            <div class="md-form">
-              <input class="form-control" type="text" placeholder="Search..." aria-label="Search">
+    <div class="container-fluid">
+      <div class="row">
+  
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <h3>
+            Quản lý tác giả
+          </h3>
+  
+          <div class="row" style="background-color: white">
+  
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 10px 0px 10px 15px">
+              <button kendoButton (click)="onAddAuthorClick()" [primary]=true class="btn-them-tac-gia" data-toggle="modal" data-target="#exampleModalCenter">Thêm tác giả</button>
             </div>
+  
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <div class="row">
+  
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                  <kendo-combobox [data]="listItems" [value]="'Basketball'">
+                  </kendo-combobox>
+                </div>
+  
+                <!-- Search form -->
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                  <form class="form-inline md-form form-sm">
+                    <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </form>
+                </div>
+  
+              </div>
+            </div>
+            <br/>
+  
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-top: 10px">
+              <kendo-grid [data]="gridData" [height]="410">
+                <kendo-grid-column field="AuthorName" title="Họ tên tác giả" width="300">
+                </kendo-grid-column>
+                <kendo-grid-column field="AuthorHistory" title="History" width="">
+                </kendo-grid-column>
+                <kendo-grid-column field="Discontinued" title="" width="300">
+                  <ng-template kendoGridCellTemplate let-dataItem>
+                    <button type="button" class="btn btn-primary btn-circle btn-md" style="background-color: rgb(57, 148, 233)">
+                      <i class="glyphicon glyphicon-pencil"></i>
+                    </button>
+                    <button type="button" class="btn btn-info btn-circle btn-md" style="background-color: rgb(38, 202, 120)">
+                      <i class="glyphicon glyphicon-option-vertical"></i>
+                    </button>
+                    <button type="button" class="btn btn-danger btn-circle btn-md">
+                      <i class="glyphicon glyphicon-remove"></i>
+                    </button>
+                  </ng-template>
+                </kendo-grid-column>
+              </kendo-grid>
+            </div>
+  
           </div>
-
+  
         </div>
-      </div>
-      <br/>
-
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <kendo-grid [data]="gridData" [height]="410">
-          <kendo-grid-column field="AuthorName" title="Tên tác giả" width="300">
-          </kendo-grid-column>
-          <kendo-grid-column field="History" title="Lịch sử" width="500">
-          </kendo-grid-column>
-          <kendo-grid-column field="Discontinued" title="">
-            <ng-template kendoGridCellTemplate let-dataItem>
-              <button type="button" class="btn btn-primary btn-circle btn-lg">
-                <i class="glyphicon glyphicon-pencil"></i>
-              </button>
-              <button type="button" class="btn btn-info btn-circle btn-lg">
-                <i class="glyphicon glyphicon-option-vertical"></i>
-              </button>
-              <button type="button" class="btn btn-danger btn-circle btn-lg">
-                <i class="glyphicon glyphicon-remove"></i>
-              </button>
-            </ng-template>
-          </kendo-grid-column>
-        </kendo-grid>
+  
       </div>
     </div>
   </div>
-</div>
-
