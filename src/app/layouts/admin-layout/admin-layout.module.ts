@@ -17,8 +17,9 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 
 import { AddNewBookComponent } from '../../book-management/add-new-book/add-new-book.component';
-
 import { AddNewAuthorComponent } from '../../author-management/add-new-author/add-new-author.component';
+import { AddNewPublisherComponent } from '../../publisher-management/add-new-publisher/add-new-publisher.component';
+import { AddNewCategoryComponent } from '../../category-management/add-new-category/add-new-category.component';
 
 import { MatSelectModule } from '@angular/material/select';
 // import { HttpModule } from '@angular/http';
@@ -31,8 +32,9 @@ import {
 } from '@angular/material';
 
 import { BooklistComponent } from '../../book-management/booklist/booklist.component';
-
 import { AuthorListComponent } from '../../author-management/author-list/author-list.component';
+import { PublisherListComponent } from '../../publisher-management/publisher-list/publisher-list.component';
+import { CategoryListComponent } from '../../category-management/category-list/category-list.component';
 
 @NgModule({
   imports: [
@@ -61,6 +63,10 @@ import { AuthorListComponent } from '../../author-management/author-list/author-
     AddNewBookComponent,
     AuthorListComponent,
     AddNewAuthorComponent,
+    PublisherListComponent,
+    AddNewPublisherComponent,
+    CategoryListComponent,
+    AddNewCategoryComponent,
   ]
 })
 

@@ -1,31 +1,40 @@
-<div class="main-content">
+<div class="main-content" style="font-size: 16px">
   <div class="container-fluid">
-    <div class="row">
-      <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-        Launch demo modal
-      </button>
-
-      <!-- Modal -->
+    <div class="row" style="font-size: 16px">
       <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">Thêm tác giả</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              ...
+
+              <form action="" method="POST" role="form">
+                <legend></legend>
+
+                <div class="form-group">
+                  <label for="">Họ tên tác giả</label>
+                  <input type="text" class="form-control" id="authorName" placeholder="">
+                  <label for="">History</label>
+                  <input type="text" class="form-control" id="authorHistory" placeholder="">
+                </div>
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onBackAuthorListClick()">Close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+            <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div> -->
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </div>

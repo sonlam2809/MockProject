@@ -9,10 +9,10 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
     { path: '/dashboard', title: 'Trang chính',  icon: 'dashboard', class: '' },
-    { path: '/list-book', title: 'Danh mục sách',  icon:'person', class: '' },
+    { path: '/list-category', title: 'Danh mục sách',  icon:'person', class: '' },
     { path: '/list-author', title: 'Quản lý tác giả',  icon:'content_paste', class: '' },
-    { path: '/publisher-management', title: 'Quản lý nhà xuất bản',  icon:'library_books', class: '' },
-    { path: '/book-management', title: 'Quản lý sách ',  icon:'bubble_chart', class: '' },
+    { path: '/list-publisher', title: 'Quản lý nhà xuất bản',  icon:'library_books', class: '' },
+    { path: '/list-book', title: 'Quản lý sách ',  icon:'bubble_chart', class: '' },
     { path: '/login', title: 'Thoát',  icon:'location_on', class: '' },
     // { path: '/notifications', title: 'Notifications',  icon:'notifications', class: '' },
     // { path: '/upgrade', title: 'Upgrade to PRO',  icon:'unarchive', class: 'active-pro' },
