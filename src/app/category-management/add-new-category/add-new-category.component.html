@@ -17,13 +17,13 @@
   
                   <div class="form-group">
                     <label for="">Tên danh mục</label>
-                    <input type="text" class="form-control" id="authorName" placeholder="">
+                    <input type="text" class="form-control" id="authorName" placeholder="" [(ngModel)] = "cate.CateName" [ngModelOptions]="{standalone: true}">
                     <label for="">Description</label>
-                    <input type="text" class="form-control" id="authorHistory" placeholder="">
+                    <input type="text" class="form-control" id="authorHistory" placeholder="" [(ngModel)] = "cate.Description" [ngModelOptions]="{standalone: true}">
                   </div>
   
                   <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onBackCategoryListClick()" style="font-size: 16px;">Quay lại</button>
-                  <button type="submit" class="btn btn-primary" style="font-size: 16px;">Thêm</button>
+                  <button type="submit" class="btn btn-primary" style="font-size: 16px;" (click) = "onAddNewCategory()">Thêm</button>
                 </form>
   
               </div>

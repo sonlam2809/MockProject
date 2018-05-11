@@ -22,7 +22,7 @@ import { AddNewPublisherComponent } from '../../publisher-management/add-new-pub
 import { AddNewCategoryComponent } from '../../category-management/add-new-category/add-new-category.component';
 
 import { MatSelectModule } from '@angular/material/select';
-// import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import {
   MatButtonModule,
@@ -36,6 +36,8 @@ import { AuthorListComponent } from '../../author-management/author-list/author-
 import { PublisherListComponent } from '../../publisher-management/publisher-list/publisher-list.component';
 import { CategoryListComponent } from '../../category-management/category-list/category-list.component';
 
+import { CategoryService } from '../../services/category.service';
+import { ShareService } from '../../services/share.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -49,6 +51,7 @@ import { CategoryListComponent } from '../../category-management/category-list/c
     ButtonsModule,
     DropDownsModule,
     MatSelectModule,
+    HttpClientModule,
   ],
   declarations: [
     DashboardComponent,
@@ -67,6 +70,10 @@ import { CategoryListComponent } from '../../category-management/category-list/c
     AddNewPublisherComponent,
     CategoryListComponent,
     AddNewCategoryComponent,
+  ],
+  providers: [
+    CategoryService,
+    ShareService
   ]
 })
 

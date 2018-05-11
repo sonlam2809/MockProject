@@ -22,9 +22,9 @@ export class BooklistComponent implements OnInit {
 
   ngOnInit() {
   }
-  onButtonClick() {
-    console.log('click');
-    this.router.navigateByUrl('/add-new-book');
-  }
+  // onButtonClick() {
+  //   console.log('click');
+  //   this.router.navigateByUrl('/add-new-book');
+  // }
 
 }

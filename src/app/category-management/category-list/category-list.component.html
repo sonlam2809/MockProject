@@ -34,10 +34,10 @@
             <br/>
   
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-top: 10px">
-              <kendo-grid [data]="gridData" [height]="410">
-                <kendo-grid-column field="CategoryName" title="Tên danh mục" width="300">
+              <kendo-grid [data]="cate" [height]="410">
+                <kendo-grid-column field="CateName" title="Tên danh mục" width="300">
                 </kendo-grid-column>
-                <kendo-grid-column field="CategoryHistory" title="History" width="">
+                <kendo-grid-column field="Description" title="History" width="">
                 </kendo-grid-column>
                 <kendo-grid-column field="Discontinued" title="" width="300">
                   <ng-template kendoGridCellTemplate let-dataItem>
