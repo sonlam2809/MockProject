@@ -19,7 +19,6 @@ import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { AddNewBookComponent } from '../../book-management/add-new-book/add-new-book.component';
 import { AddNewAuthorComponent } from '../../author-management/add-new-author/add-new-author.component';
 import { AddNewPublisherComponent } from '../../publisher-management/add-new-publisher/add-new-publisher.component';
-import { AddNewCategoryComponent } from '../../category-management/add-new-category/add-new-category.component';
 
 import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
@@ -38,6 +37,8 @@ import { CategoryListComponent } from '../../category-management/category-list/c
 
 import { CategoryService } from '../../services/category.service';
 import { ShareService } from '../../services/share.service';
+import { CategoryListModule } from '../../category-management/category-list/category-list.module';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -52,6 +53,7 @@ import { ShareService } from '../../services/share.service';
     DropDownsModule,
     MatSelectModule,
     HttpClientModule,
+    CategoryListModule,
   ],
   declarations: [
     DashboardComponent,
@@ -69,7 +71,6 @@ import { ShareService } from '../../services/share.service';
     PublisherListComponent,
     AddNewPublisherComponent,
     CategoryListComponent,
-    AddNewCategoryComponent,
   ],
   providers: [
     CategoryService,

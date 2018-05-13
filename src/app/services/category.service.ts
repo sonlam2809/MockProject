@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Category } from '../model/category';
-import  "rxjs/add/operator/map";
+import "rxjs/add/operator/map";
 import { Http, Response } from '@angular/http';
 
 import { ShareService } from './share.service';
@@ -14,15 +14,28 @@ export class CategoryService {
 
   }
 
+  /* get categories */
   getCategory(): Observable<Category[]> {
     return this.share.get<Category>(this.API);
   }
 
-  postCategory(cate: Category): Observable<Category>{
+  /* add new category */
+  postCategory(cate: Category): Observable<Category> {
     return this.share.post<Category>(this.API, cate);
   }
 
+  /* delete category */
+  deleteCategory(cateId: string): Observable<Category> {
+    return this.share.delete<Category>(this.API + "/" + cateId);
+  }
 
+  /* update category */
+  updateCategory(cateID: number, cate: Category): Observable<Category> {
+    return this.share.update<Category>(this.API + "/" + cateID, cate);
+  }
 
-
+  /* get categories */
+  getCategoryByID(id: number): Observable<Category> {
+    return this.share.getById(this.API + "/" + id);
+  }
 }

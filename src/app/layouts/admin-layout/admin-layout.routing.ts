@@ -15,8 +15,8 @@ import { AuthorListComponent } from '../../author-management/author-list/author-
 import { PublisherListComponent } from '../../publisher-management/publisher-list/publisher-list.component';
 import { AddNewPublisherComponent } from '../../publisher-management/add-new-publisher/add-new-publisher.component';
 import { CategoryListComponent } from '../../category-management/category-list/category-list.component';
-import { AddNewCategoryComponent } from '../../category-management/add-new-category/add-new-category.component';
-
+import { CategoryEditComponent } from '../../category-management/category-edit/category-edit.component';
+import { Component } from '@angular/core';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -61,16 +61,31 @@ export const AdminLayoutRoutes: Routes = [
     //         component: UpgradeComponent
     //     }]
     // }
-    { path: 'dashboard',      component: DashboardComponent },
-    { path: 'list-book',   component:BooklistComponent},
-    { path: 'logout',           component: MapsComponent },
-    { path: 'notifications',  component: NotificationsComponent },
-    { path: 'upgrade',        component: UpgradeComponent },
-    { path: 'add-new-book', component: AddNewBookComponent},
-    { path: 'add-new-author', component: AddNewAuthorComponent},
-    { path: 'list-author', component: AuthorListComponent},
-    { path: 'list-publisher', component: PublisherListComponent},
-    { path: 'add-new-publisher', component: AddNewPublisherComponent},
-    { path: 'list-category', component: CategoryListComponent},
-    { path: 'add-new-category', component: AddNewCategoryComponent},
+    { path: 'dashboard', component: DashboardComponent },
+    { path: 'list-book', component: BooklistComponent },
+    { path: 'logout', component: MapsComponent },
+    { path: 'notifications', component: NotificationsComponent },
+    { path: 'upgrade', component: UpgradeComponent },
+    { path: 'add-new-book', component: AddNewBookComponent },
+    { path: 'add-new-author', component: AddNewAuthorComponent },
+    { path: 'list-author', component: AuthorListComponent },
+    { path: 'list-publisher', component: PublisherListComponent },
+    { path: 'add-new-publisher', component: AddNewPublisherComponent },
+    {
+        path: 'list-category', component: CategoryListComponent,
+        children: [
+            {
+                path: ':id/edit',
+                component: CategoryEditComponent
+            },
+            {
+                path: '',
+                component: CategoryListComponent
+            },
+            {
+                path: 'list-category',
+                component: CategoryEditComponent
+            }
+        ]
+    },
 ];
