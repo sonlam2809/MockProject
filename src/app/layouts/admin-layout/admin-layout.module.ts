@@ -39,6 +39,10 @@ import { CategoryService } from '../../services/category.service';
 import { ShareService } from '../../services/share.service';
 import { CategoryListModule } from '../../category-management/category-list/category-list.module';
 
+import { DialogModule } from '@progress/kendo-angular-dialog';
+
+import { CategoryEditComponent } from '../../category-management/category-edit/category-edit.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -54,6 +58,8 @@ import { CategoryListModule } from '../../category-management/category-list/cate
     MatSelectModule,
     HttpClientModule,
     CategoryListModule,
+    ReactiveFormsModule,
+    DialogModule,
   ],
   declarations: [
     DashboardComponent,
@@ -71,6 +77,7 @@ import { CategoryListModule } from '../../category-management/category-list/cate
     PublisherListComponent,
     AddNewPublisherComponent,
     CategoryListComponent,
+    CategoryEditComponent
   ],
   providers: [
     CategoryService,

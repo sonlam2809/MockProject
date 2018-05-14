@@ -73,19 +73,19 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'add-new-publisher', component: AddNewPublisherComponent },
     {
         path: 'list-category', component: CategoryListComponent,
-        children: [
-            {
-                path: ':id/edit',
-                component: CategoryEditComponent
-            },
-            {
-                path: '',
-                component: CategoryListComponent
-            },
-            {
-                path: 'list-category',
-                component: CategoryEditComponent
-            }
-        ]
+        // children: [
+        //     {
+        //         path: ':id/edit',
+        //         component: CategoryEditComponent
+        //     },
+        //     {
+        //         path: '',
+        //         component: CategoryListComponent
+        //     },
+        //     {
+        //         path: 'list-category',
+        //         component: CategoryEditComponent
+        //     }
+        // ]
     },
 ];

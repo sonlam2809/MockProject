@@ -1,5 +1,5 @@
 <!--Pop up edit-->
-<div class="main-content" style="font-size: 16px">
+<!-- <div class="main-content" style="font-size: 16px">
   <div class="container-fluid">
     <div class="row" style="font-size: 16px">
       <div class="modal fade" id="editCategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -13,7 +13,7 @@
             </div>
             <div class="modal-body">
 
-              <form action="" method="POST" role="form">
+              <form>
                 <legend></legend>
 
                 <div class="form-group">
@@ -28,13 +28,42 @@
               </form>
 
             </div>
-            <!-- <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
-                    </div> -->
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
+
+
+<kendo-dialog *ngIf="active" (close)="closeForm()">
+    <!-- <kendo-dialog-titlebar>
+      {{ isNew ? 'Add new Category' : 'Edit Category' }}
+    </kendo-dialog-titlebar> -->
+
+      <form novalidate [formGroup]="editForm">
+          <div class="form-group">
+              <label for="CateName" class="control-label">Category name</label>
+
+              <input type="text" class="k-textbox" formControlName="CateName" />
+
+              <div
+                  class="k-tooltip k-tooltip-validation"
+                  [hidden]="editForm.controls.CateName.valid || editForm.controls.CateName.pristine">
+                  CateName is required
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="Description" class="control-label">Description</label>
+
+              <input type="text" class="k-textbox" formControlName="Description" />
+          </div>
+          
+      </form>
+
+      <kendo-dialog-actions>
+          <button class="k-button" (click)="onCancel($event)">Cancel</button>
+          <button class="k-button k-primary" [disabled]="!editForm.valid" (click)="onSave($event)">Save</button>
+      </kendo-dialog-actions>
+  </kendo-dialog>

@@ -31,11 +31,8 @@ export class CategoryService {
 
   /* update category */
   updateCategory(cateID: number, cate: Category): Observable<Category> {
+    // console.log("ssssssssssssssss" + cate);
     return this.share.update<Category>(this.API + "/" + cateID, cate);
   }
 
-  /* get categories */
-  getCategoryByID(id: number): Observable<Category> {
-    return this.share.getById(this.API + "/" + id);
-  }
 }

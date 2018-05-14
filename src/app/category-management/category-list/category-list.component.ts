@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { sampleProducts } from '../../model/products';
 import { Router } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
@@ -6,8 +6,14 @@ import { Subscription } from 'rxjs/Subscription';
 import { Category } from '../../model/category';
 
 import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
-import { SortDescriptor, orderBy } from '@progress/kendo-data-query';
+import { SortDescriptor, orderBy, State } from '@progress/kendo-data-query';
 import { Observable } from 'rxjs/Observable';
+
+
+
+
+
+
 
 @Component({
   selector: 'app-category-list',
@@ -37,11 +43,13 @@ export class CategoryListComponent implements OnInit {
 
   constructor(private router: Router, public categoryService: CategoryService) {
     this._cate = new Category();
+
   }
 
   ngOnInit() {
     this.getall();
     console.log(this.cate);
+    //this.editService.read();
   }
 
   ngOnDestroy() {
@@ -51,30 +59,18 @@ export class CategoryListComponent implements OnInit {
   }
 
   /* sortChange event */
-  public sortChange(sort: SortDescriptor[]): void {
-    this.sort = sort;
-    this.loadCategories(this.cate);
-  }
+  // public sortChange(sort: SortDescriptor[]): void {
+  //   this.sort = sort;
+  //   this.loadCategories(this.cate);
+  // }
 
-  /* get ordered category */
+  /* get category => gridView*/
   private loadCategories(_pcate: Category[]): void {
     this.gridView = {
-      data: orderBy(_pcate, this.sort),
+      data: _pcate,
       total: _pcate.length
     };
   }
-
-  // private paging(_pcate: Category[]): void {
-  //   this.gridView = {
-  //     data: _pcate.slice(this.skip, this.skip + this.pageSize),
-  //     total: _pcate.length
-  //   };
-  // }
-
-  // public pageChange(event: PageChangeEvent): void {
-  //   this.skip = event.skip;
-  //   this.getall();
-  // }
 
   //-------------------------------
   public listItems: Array<string> = [
@@ -89,8 +85,8 @@ export class CategoryListComponent implements OnInit {
   getall() {
     return this.categoryService.getCategory().subscribe(x => {
       this.cate = x;
+      
       this.loadCategories(this.cate);
-      //this.paging(this.cate);
       console.log(x);
     });
   }
@@ -119,6 +115,57 @@ export class CategoryListComponent implements OnInit {
   }
 
 
+  // public editID: number;
+  // onClickEditCategory(id: number){
+  //   this.editID = id;
+  // }
+
+
+
+  
+  public gridState: State = {
+    sort: [],
+    skip: 0,
+    take: 10
+  };
+
+  public editDataItem: Category;
+  public isNew: boolean;
+
+
+  public onStateChange(state: State) {
+      this.gridState = state;
+
+    //this.editService.read();
+}
+
+public addHandler() {
+    this.editDataItem = new Category();
+    this.isNew = true;
+}
+
+public editHandler({dataItem}) {
+    this.editDataItem = dataItem;
+    this.isNew = false;
+}
+
+public cancelHandler() {
+    this.editDataItem = undefined;
+}
+
+public saveHandler(cate: Category) {
+
+  console.log(cate);
+    this.categoryService.updateCategory(this.editDataItem.CateID, cate).subscribe((data)=>{
+      console.log(data);
+    });
+
+    this.editDataItem = undefined;
+}
+
+public removeHandler({dataItem}) {
+    //this.categoryService.remove(dataItem);
+}
   
 }
 

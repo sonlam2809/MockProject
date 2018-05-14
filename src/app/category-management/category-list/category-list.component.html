@@ -53,14 +53,13 @@
             <kendo-grid 
                 [data]="gridView" 
                 [height]="410" 
-                [sortable]="{
-                  allowUnsort: allowUnsort,
-                  mode: multiple ? 'multiple' : 'single'
-                  }" 
-                [sort]="sort" 
-                (sortChange)="sortChange($event)"
-
                 
+                [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
+                [pageable]="true" [sortable]="true"
+                
+                (dataStateChange)="onStateChange($event)"
+                (edit)="editHandler($event)" (remove)="removeHandler($event)"
+                (add)="addHandler($event)"
               >
               <kendo-grid-column field="CateName" title="Tên danh mục" width="300">
               </kendo-grid-column>
@@ -68,7 +67,7 @@
               </kendo-grid-column>
               <kendo-grid-column field="Discontinued" title="" width="300">
                 <ng-template kendoGridCellTemplate let-dataItem>
-                  <button data-toggle="modal" data-target="#editCategoryModal" type="button" class="btn btn-primary btn-circle btn-md" style="background-color: rgb(57, 148, 233)" [routerLink]="['/list-category', dataItem.CateID, 'edit']"  >
+                  <button type="button" class="btn btn-primary btn-circle btn-md" style="background-color: rgb(57, 148, 233)">
                     <i class="glyphicon glyphicon-pencil"></i>
                   </button>
                   <button type="button" class="btn btn-info btn-circle btn-md" style="background-color: rgb(38, 202, 120)">
@@ -77,6 +76,7 @@
                   <button type="button" class="btn btn-danger btn-circle btn-md" (click)="onClickDeleteCategory(dataItem.CateID)">
                     <i class="glyphicon glyphicon-remove"></i>
                   </button>
+                  <button kendoGridEditCommand [primary]="true">Edit</button>
                 </ng-template>
               </kendo-grid-column>
             </kendo-grid>
@@ -131,5 +131,10 @@
   </div>
 </div>
 
-
-<router-outlet></router-outlet>
+<!--Popup edit category-->
+<category-edit 
+  [model]="editDataItem" 
+  [isNew]="isNew" 
+  (save)="saveHandler($event)" 
+  (cancel)="cancelHandler()">
+</category-edit>
