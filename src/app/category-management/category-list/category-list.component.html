@@ -67,7 +67,7 @@
               </kendo-grid-column>
               <kendo-grid-column field="Discontinued" title="" width="300">
                 <ng-template kendoGridCellTemplate let-dataItem>
-                  <button type="button" class="btn btn-primary btn-circle btn-md" style="background-color: rgb(57, 148, 233)">
+                  <button kendoGridEditCommand [primary]="true" class="btn btn-primary btn-circle btn-md" style="background-color: rgb(57, 148, 233)">
                     <i class="glyphicon glyphicon-pencil"></i>
                   </button>
                   <button type="button" class="btn btn-info btn-circle btn-md" style="background-color: rgb(38, 202, 120)">
@@ -76,7 +76,6 @@
                   <button type="button" class="btn btn-danger btn-circle btn-md" (click)="onClickDeleteCategory(dataItem.CateID)">
                     <i class="glyphicon glyphicon-remove"></i>
                   </button>
-                  <button kendoGridEditCommand [primary]="true">Edit</button>
                 </ng-template>
               </kendo-grid-column>
             </kendo-grid>
