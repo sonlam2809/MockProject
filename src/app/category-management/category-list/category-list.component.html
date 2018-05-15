@@ -17,14 +17,24 @@
             <div class="row">
 
               <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <kendo-combobox [data]="listItems" [value]="'Basketball'">
-                </kendo-combobox>
+                <select class="btn btn-primary dropdown-toggle" [(ngModel)]="selectedPageSize" (change)="loadItems()" style="font-size: 16px">
+                  <option value="2">2 Rows</option>
+                  <option value="3">3 Rows</option>
+                  <option value="5">5 Rows</option>
+                  <option value="10">10 Rows</option>
+                  <option value="15">15 Rows</option>
+                  <option value="20">20 Rows</option>
+                  <option value="25">25 Rows</option>
+                </select> 
               </div>
 
               <!-- Search form -->
               <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                 <form class="form-inline md-form form-sm">
-                  <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search">
+                  <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search" 
+                  [(ngModel)]="searchText" (keyup.enter)="SearchEnter()"
+                  [ngModelOptions]="{standalone: true}"
+                  >
                   <i class="fa fa-search" aria-hidden="true"></i>
                 </form>
               </div>
@@ -54,10 +64,10 @@
                 [data]="gridView" 
                 [height]="410" 
                 
-                [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
-                [pageable]="true" [sortable]="true"
+                [pageSize]="selectedPageSize" [skip]="skip" 
+                [pageable]="true" 
+                (pageChange)="pageChange($event)"
                 
-                (dataStateChange)="onStateChange($event)"
                 (edit)="editHandler($event)" (remove)="removeHandler($event)"
                 (add)="addHandler($event)"
               >

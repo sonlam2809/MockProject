@@ -35,4 +35,8 @@ export class CategoryService {
     return this.share.update<Category>(this.API + "/" + cateID, cate);
   }
 
+  /* get categories */
+  getCategoryPage(pageNo: number, pagesize: number, lookfor: string) {
+    return this.http.get(this.API + "?currentPage=" + pageNo +"&pageSize=" + pagesize +"&lookfor=" +lookfor).map((res: Response) => res.json());
+  }
 }

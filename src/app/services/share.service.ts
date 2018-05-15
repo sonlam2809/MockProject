@@ -36,15 +36,15 @@ export class ShareService {
   }
 
   /* Update entity */
-  update<T>(api: string, object: T): Observable<T>{
+  update<T>(api: string, object: T): Observable<T> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
     // console.log(api);
     // console.log(object);
 
-    return this.http.put(api,JSON.stringify(object), options)
-    .map((res: Response) => res.json());
+    return  this.http.put(api, JSON.stringify(object), options)
+      .map((res:  Response)  =>  res.json());
   }
 
 

@@ -22,6 +22,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class CategoryListComponent implements OnInit {
 
+  public selectedPageSize = 3;
   public subscription: Subscription;
   public cate: Category[];
   public _cate: Category;
@@ -47,8 +48,8 @@ export class CategoryListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getall();
-    console.log(this.cate);
+    this.loadItems();
+    //this.getall();
     //this.editService.read();
   }
 
@@ -65,31 +66,28 @@ export class CategoryListComponent implements OnInit {
   // }
 
   /* get category => gridView*/
-  private loadCategories(_pcate: Category[]): void {
-    this.gridView = {
-      data: _pcate,
-      total: _pcate.length
-    };
-  }
+  // private loadCategories(_pcate: Category[]): void {
+  //   this.gridView = {
+  //     data: _pcate,
+  //     total: _pcate.length
+  //   };
+  // }
 
   //-------------------------------
-  public listItems: Array<string> = [
-    'Baseball', 'Basketball', 'Cricket', 'Field Hockey',
-    'Football', 'Table Tennis', 'Tennis', 'Volleyball'
+  public listItems: Array<number> = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10
   ];
-
-  public value = ['Basketball', 'Cricket'];
   //-------------------------------
 
   /* get all categories */
-  getall() {
-    return this.categoryService.getCategory().subscribe(x => {
-      this.cate = x;
-      
-      this.loadCategories(this.cate);
-      console.log(x);
-    });
-  }
+  // getall() {
+  //   return this.categoryService.getCategory().subscribe(x => {
+  //     this.cate = x;
+
+  //     this.loadCategories(this.cate);
+  //     console.log(x);
+  //   });
+  // }
 
   /* click back pop up button */
   onBackCategoryListClick() {
@@ -101,7 +99,7 @@ export class CategoryListComponent implements OnInit {
     this.categoryService.postCategory(this._cate).subscribe(x => {
       alert("Tạo mới danh mục thành công!");
       this.router.navigateByUrl("/list-category");
-      this.getall();
+      this.loadItems();
     });
   }
 
@@ -109,7 +107,7 @@ export class CategoryListComponent implements OnInit {
   onClickDeleteCategory(cateId: string) {
     this.categoryService.deleteCategory(cateId).subscribe((x) => {
       console.log(x);
-      this.getall();
+      this.loadItems();
       alert("Xóa danh mục thành công!");
     });
   }
@@ -122,50 +120,79 @@ export class CategoryListComponent implements OnInit {
 
 
 
-  
-  public gridState: State = {
-    sort: [],
-    skip: 0,
-    take: 10
-  };
+
 
   public editDataItem: Category;
   public isNew: boolean;
 
 
-  public onStateChange(state: State) {
-      this.gridState = state;
-
-    //this.editService.read();
-}
-
-public addHandler() {
+  public addHandler() {
     this.editDataItem = new Category();
     this.isNew = true;
-}
+  }
 
-public editHandler({dataItem}) {
+  public editHandler({ dataItem }) {
     this.editDataItem = dataItem;
     this.isNew = false;
-}
+  }
 
-public cancelHandler() {
+  public cancelHandler() {
     this.editDataItem = undefined;
-}
+  }
 
-public saveHandler(cate: Category) {
+  public saveHandler(cate: Category) {
 
-  console.log(cate);
-    this.categoryService.updateCategory(this.editDataItem.CateID, cate).subscribe((data)=>{
+    console.log(cate);
+    this.categoryService.updateCategory(this.editDataItem.CateID, cate).subscribe((data) => {
       console.log(data);
     });
 
     this.editDataItem = undefined;
-}
+  }
 
-public removeHandler({dataItem}) {
+  public removeHandler({ dataItem }) {
     //this.categoryService.remove(dataItem);
-}
-  
+  }
+
+
+  /* on change event combobox */
+
+  onChange(newValue) {
+    this.selectedPageSize = newValue;
+    console.log("page size: " + this.selectedPageSize);
+    // ... do other stuff here ...
+    this.loadItems();
+  }
+
+  public skip = 0;
+  public currentPage = 1;
+
+  public pageChange(event: PageChangeEvent): void {
+
+    this.skip = event.skip;
+    this.currentPage = this.skip / this.selectedPageSize + 1;
+    // console.log("loonffffffffffffffff " + Math.floor(this.skip / this.selectedPageSize));
+    // console.log("pageChange skip: " + this.skip);
+
+    // console.log("current page" + this.currentPage);
+    this.loadItems();
+  }
+  private loadItems(): void {
+
+    this.categoryService.getCategoryPage(this.currentPage, this.selectedPageSize, this.searchText).subscribe((x) => {
+      this.gridView = {
+        data: x["category"],
+        total: x["total"]
+      }
+    });
+  }
+
+  /* Search */
+  SearchEnter(){
+    this.loadItems();
+  }
+
+  private searchText = "";
+
 }
 

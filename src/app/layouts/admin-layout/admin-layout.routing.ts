@@ -10,12 +10,16 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { BooklistComponent } from '../../book-management/booklist/booklist.component';
 import { AddNewBookComponent } from '../../book-management/add-new-book/add-new-book.component';
-import { AddNewAuthorComponent } from '../../author-management/add-new-author/add-new-author.component';
-import { AuthorListComponent } from '../../author-management/author-list/author-list.component';
+
 import { PublisherListComponent } from '../../publisher-management/publisher-list/publisher-list.component';
 import { AddNewPublisherComponent } from '../../publisher-management/add-new-publisher/add-new-publisher.component';
+
 import { CategoryListComponent } from '../../category-management/category-list/category-list.component';
 import { CategoryEditComponent } from '../../category-management/category-edit/category-edit.component';
+
+
+// import { AuthorListComponent } from '../../author-management/author-list/author-list.component';
+
 import { Component } from '@angular/core';
 
 export const AdminLayoutRoutes: Routes = [
@@ -67,8 +71,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'notifications', component: NotificationsComponent },
     { path: 'upgrade', component: UpgradeComponent },
     { path: 'add-new-book', component: AddNewBookComponent },
-    { path: 'add-new-author', component: AddNewAuthorComponent },
-    { path: 'list-author', component: AuthorListComponent },
+    // { path: 'list-author', component: AuthorListComponent },
     { path: 'list-publisher', component: PublisherListComponent },
     { path: 'add-new-publisher', component: AddNewPublisherComponent },
     {

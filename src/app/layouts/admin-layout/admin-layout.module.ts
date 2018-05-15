@@ -17,7 +17,6 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 
 import { AddNewBookComponent } from '../../book-management/add-new-book/add-new-book.component';
-import { AddNewAuthorComponent } from '../../author-management/add-new-author/add-new-author.component';
 import { AddNewPublisherComponent } from '../../publisher-management/add-new-publisher/add-new-publisher.component';
 
 import { MatSelectModule } from '@angular/material/select';
@@ -31,17 +30,20 @@ import {
 } from '@angular/material';
 
 import { BooklistComponent } from '../../book-management/booklist/booklist.component';
-import { AuthorListComponent } from '../../author-management/author-list/author-list.component';
+
 import { PublisherListComponent } from '../../publisher-management/publisher-list/publisher-list.component';
-import { CategoryListComponent } from '../../category-management/category-list/category-list.component';
 
-import { CategoryService } from '../../services/category.service';
 import { ShareService } from '../../services/share.service';
-import { CategoryListModule } from '../../category-management/category-list/category-list.module';
-
 import { DialogModule } from '@progress/kendo-angular-dialog';
 
+import { CategoryListModule } from '../../category-management/category-list/category-list.module';
 import { CategoryEditComponent } from '../../category-management/category-edit/category-edit.component';
+import { CategoryService } from '../../services/category.service';
+import { CategoryListComponent } from '../../category-management/category-list/category-list.component';
+
+
+
+// import { AuthorListComponent } from '../../author-management/author-list/author-list.component';
 
 @NgModule({
   imports: [
@@ -57,9 +59,11 @@ import { CategoryEditComponent } from '../../category-management/category-edit/c
     DropDownsModule,
     MatSelectModule,
     HttpClientModule,
-    CategoryListModule,
     ReactiveFormsModule,
     DialogModule,
+
+    CategoryListModule,
+    
   ],
   declarations: [
     DashboardComponent,
@@ -72,15 +76,17 @@ import { CategoryEditComponent } from '../../category-management/category-edit/c
     UpgradeComponent,
     BooklistComponent,
     AddNewBookComponent,
-    AuthorListComponent,
-    AddNewAuthorComponent,
     PublisherListComponent,
     AddNewPublisherComponent,
     CategoryListComponent,
-    CategoryEditComponent
+    CategoryEditComponent,
+    // AuthorListComponent,
+    
+    
   ],
   providers: [
     CategoryService,
+    
     ShareService
   ]
 })
