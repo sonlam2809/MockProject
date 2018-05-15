@@ -41,9 +41,11 @@ import { CategoryEditComponent } from '../../category-management/category-edit/c
 import { CategoryService } from '../../services/category.service';
 import { CategoryListComponent } from '../../category-management/category-list/category-list.component';
 
+import { AuthorListModule } from '../../author-management/author-list/author-list.module';
+import { AuthorListComponent } from '../../author-management/author-list/author-list.component';
 
 
-// import { AuthorListComponent } from '../../author-management/author-list/author-list.component';
+
 
 @NgModule({
   imports: [
@@ -63,6 +65,7 @@ import { CategoryListComponent } from '../../category-management/category-list/c
     DialogModule,
 
     CategoryListModule,
+    AuthorListModule,
     
   ],
   declarations: [
@@ -80,7 +83,7 @@ import { CategoryListComponent } from '../../category-management/category-list/c
     AddNewPublisherComponent,
     CategoryListComponent,
     CategoryEditComponent,
-    // AuthorListComponent,
+    AuthorListComponent,
     
     
   ],

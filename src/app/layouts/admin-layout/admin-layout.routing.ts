@@ -18,9 +18,9 @@ import { CategoryListComponent } from '../../category-management/category-list/c
 import { CategoryEditComponent } from '../../category-management/category-edit/category-edit.component';
 
 
-// import { AuthorListComponent } from '../../author-management/author-list/author-list.component';
-
 import { Component } from '@angular/core';
+
+import { AuthorListComponent } from '../../author-management/author-list/author-list.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -71,7 +71,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'notifications', component: NotificationsComponent },
     { path: 'upgrade', component: UpgradeComponent },
     { path: 'add-new-book', component: AddNewBookComponent },
-    // { path: 'list-author', component: AuthorListComponent },
+    { path: 'list-author', component: AuthorListComponent },
     { path: 'list-publisher', component: PublisherListComponent },
     { path: 'add-new-publisher', component: AddNewPublisherComponent },
     {
