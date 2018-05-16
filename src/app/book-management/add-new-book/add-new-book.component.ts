@@ -80,6 +80,15 @@ export class AddNewBookComponent implements OnInit {
     }
     reader.readAsDataURL(this.fileToUpload);
   }
+
+
+  OnSubmit(Image){
+    this.bookService.postFile(this.fileToUpload).subscribe((x)=>{
+      console.log("Doneeeeeeeeeeeee");
+      Image.value = null;
+      this.imgUrl = "http://placehold.it/500";
+    });
+  }
   /* add new book */
 
 }

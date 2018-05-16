@@ -24,21 +24,21 @@
               </mat-form-field>
               <mat-form-field>
                 <mat-select placeholder="Chọn danh mục">
-                  <mat-option *ngFor = "let category of listCategory" value = "category.CateID">
+                  <mat-option *ngFor="let category of listCategory" value="category.CateID">
                     {{category.CateName}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field>
                 <mat-select placeholder="Chọn tác giả">
-                  <mat-option *ngFor = "let author of listAuthor" value="author.AuthorID">
+                  <mat-option *ngFor="let author of listAuthor" value="author.AuthorID">
                     {{author.AuthorName}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field>
                 <mat-select placeholder="Chọn nhà xuất bản">
-                  <mat-option *ngFor = "let publisher of listPublisher" value ="publisher.PubID">
+                  <mat-option *ngFor="let publisher of listPublisher" value="publisher.PubID">
                     {{publisher.Name}}
                   </mat-option>
                 </mat-select>
@@ -51,31 +51,35 @@
               </mat-form-field>
               <mat-form-field>
                 <mat-select placeholder="Trạng thái">
-                  <mat-option *ngFor = "let bookstatus of listBookStatus" value ="bookstatus.BookStatusID">
+                  <mat-option *ngFor="let bookstatus of listBookStatus" value="bookstatus.BookStatusID">
                     {{bookstatus.BookStatus}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-              
+
               <div class="row">
-                  <button type="button" class="btn btn-danger btn-lg" (click)="OnBackClick()"><span class="glyphicon glyphicon-arrow-left"></span> Quay lại</button>
-                  <button type="button" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-arrow-right"></span> Tạo</button>
+                <button type="button" class="btn btn-danger btn-lg" (click)="OnBackClick()" style="font-size: 16px;">
+                  <span class="glyphicon glyphicon-arrow-left"></span> Quay lại</button>
+                <button type="button" class="btn btn-success btn-lg" style="font-size: 16px;">
+                  <span class="glyphicon glyphicon-arrow-right"></span> Tạo</button>
               </div>
-              
+
             </form>
           </div>
-
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <form #imageForm=ngForm (ngSubmit)="OnSubmit(Image)">
               <div class="row">
-                  <input type="file" #Image accept="image/*" (change)="handleInputFile(this);" />
-              
-                </div>
-                
-                <img [src]="imgUrl"  class="img-responsive" alt="Image">
-                
-                <button type="Submit" class="btn btn-sm btn-default">Submit</button>
-                
-                
+                <img [src]="imgUrl" class="img-responsive" alt="Image" style="height: 500px; max-width: 100%;">
+              </div>
+
+              <div class="row">
+                <input type="file" #Image accept="image/*" (change)="handleInputFile($event.target.files);" />
+              </div>
+              <div class="row">
+                <button type="Submit" class="btn btn-sm btn-default" [disabled]="Image.value==''" style="font-size: 16px; background-color: rgb(15, 153, 107);">Submit</button>
+              </div>
+            </form>
+            
           </div>
 
         </div>

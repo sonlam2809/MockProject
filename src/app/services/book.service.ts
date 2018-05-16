@@ -9,10 +9,17 @@ import { ShareService } from './share.service';
 import { Book } from '../model/book';
 import { BookStatus } from '../model/statusbook';
 
+import { HttpClient } from '@angular/common/http';
+
 @Injectable()
 export class BookService {
   private API: string = 'http://localhost:8964/api/Books';
-  constructor(public http: Http, public share: ShareService) {
+  constructor(
+    public http: Http, 
+    public share: ShareService,
+    public httpClient: HttpClient  
+  ) 
+  {
 
   }
 
@@ -39,11 +46,19 @@ export class BookService {
 
   /* get book */
   getBookPage(pageNo: number, pagesize: number, lookfor: string) {
-    return this.http.get(this.API + "?currentPage=" + pageNo +"&pageSize=" + pagesize +"&lookfor=" +lookfor).map((res: Response) => res.json());
+    return this.http.get(this.API + "?currentPage=" + pageNo + "&pageSize=" + pagesize + "&lookfor=" + lookfor).map((res: Response) => res.json());
   }
 
   /* get book status (Status, ID) */
   getBookStatus() {
     return this.share.get<BookStatus>(this.API + "/BookStatus");
+  }
+
+  /* post File */
+  postFile(fileToUpload: File) {
+    const formData: FormData = new FormData();
+    formData.append('Image', fileToUpload, fileToUpload.name);
+    console.log(formData);
+    return this.httpClient.post(this.API + "/UploadImage", formData);
   }
 }
