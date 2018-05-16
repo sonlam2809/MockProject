@@ -38,6 +38,11 @@ export class PublisherService {
 
   /* get publisher */
   getPublisherPage(pageNo: number, pagesize: number, lookfor: string) {
-    return this.http.get(this.API + "?currentPage=" + pageNo +"&pageSize=" + pagesize +"&lookfor=" +lookfor).map((res: Response) => res.json());
+    return this.http.get(this.API + "?currentPage=" + pageNo + "&pageSize=" + pagesize + "&lookfor=" + lookfor).map((res: Response) => res.json());
+  }
+
+  /* get publisher (Name, ID) */
+  getPublisherIDName() {
+    return this.share.get<Publisher>(this.API + "/getID_Name");
   }
 }

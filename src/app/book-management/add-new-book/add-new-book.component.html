@@ -23,27 +23,24 @@
                 <input matInput placeholder="Mô tả" value="">
               </mat-form-field>
               <mat-form-field>
-                <mat-select [(value)]="selectedDanhMuc">
-                  <mat-option value="">Chọn danh mục</mat-option>
-                  <mat-option value="option1">Option 1</mat-option>
-                  <mat-option value="option2">Option 2</mat-option>
-                  <mat-option value="option3">Option 3</mat-option>
+                <mat-select placeholder="Chọn danh mục">
+                  <mat-option *ngFor = "let category of listCategory" value = "category.CateID">
+                    {{category.CateName}}
+                  </mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field>
-                <mat-select [(value)]="selectedTacGia">
-                  <mat-option value="">Chọn tác giả</mat-option>
-                  <mat-option value="option1">Option 1</mat-option>
-                  <mat-option value="option2">Option 2</mat-option>
-                  <mat-option value="option3">Option 3</mat-option>
+                <mat-select placeholder="Chọn tác giả">
+                  <mat-option *ngFor = "let author of listAuthor" value="author.AuthorID">
+                    {{author.AuthorName}}
+                  </mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field>
-                <mat-select [(value)]="selectedNhaXuatBan">
-                  <mat-option value="">Chọn nhà xuất bản</mat-option>
-                  <mat-option value="option1">Option 1</mat-option>
-                  <mat-option value="option2">Option 2</mat-option>
-                  <mat-option value="option3">Option 3</mat-option>
+                <mat-select placeholder="Chọn nhà xuất bản">
+                  <mat-option *ngFor = "let publisher of listPublisher" value ="publisher.PubID">
+                    {{publisher.Name}}
+                  </mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field class="example-full-width">
@@ -53,11 +50,10 @@
                 <input matInput placeholder="Số lượng" value="">
               </mat-form-field>
               <mat-form-field>
-                <mat-select [(value)]="selectedTrangThai">
-                  <mat-option value="">Trạng thái</mat-option>
-                  <mat-option value="option1">Option 1</mat-option>
-                  <mat-option value="option2">Option 2</mat-option>
-                  <mat-option value="option3">Option 3</mat-option>
+                <mat-select placeholder="Trạng thái">
+                  <mat-option *ngFor = "let bookstatus of listBookStatus" value ="bookstatus.BookStatusID">
+                    {{bookstatus.BookStatus}}
+                  </mat-option>
                 </mat-select>
               </mat-form-field>
               
@@ -70,10 +66,16 @@
           </div>
 
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            
-            <img src="src/app/images/sach1.jpg" class="img-responsive" alt="Image">
-            <a href="#" class="btn btn-primary btn-lg">Thêm hình</a>
-
+              <div class="row">
+                  <input type="file" #Image accept="image/*" (change)="handleInputFile(this);" />
+              
+                </div>
+                
+                <img [src]="imgUrl"  class="img-responsive" alt="Image">
+                
+                <button type="Submit" class="btn btn-sm btn-default">Submit</button>
+                
+                
           </div>
 
         </div>

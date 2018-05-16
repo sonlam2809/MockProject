@@ -1,70 +1,93 @@
 <div class="main-content">
-  <div class="container-fluid">
-    <div class="row">
-
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <h3>
-          Quản lý sách
-        </h3>
-
-        <div class="row" style="background-color: white">
-
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 10px 0px 10px 15px">
-            <button kendoButton [primary]=true class="btn-them-sach" [routerLink]="['/add-new-book']">Thêm sách</button>
-          </div>
-
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="row">
-
-              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <kendo-combobox [data]="listItems" [value]="'Basketball'">
-                </kendo-combobox>
+    <div class="container-fluid">
+      <div class="row">
+  
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <h3>
+            Quản lý sách
+          </h3>
+  
+          <div class="row" style="background-color: white">
+  
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 10px 0px 10px 15px">
+                <button kendoButton [primary]=true class="btn-them-sach" [routerLink]="['/add-new-book']">Thêm sách</button>
               </div>
-
-              <!-- Search form -->
-              <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                <form class="form-inline md-form form-sm">
-                  <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </form>
+  
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <div class="row">
+  
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                  <select class="btn btn-primary dropdown-toggle" (change)="loadItems()" style="font-size: 16px">
+                    <option value="2">2 Rows</option>
+                    <option value="3">3 Rows</option>
+                    <option value="5">5 Rows</option>
+                    <option value="10">10 Rows</option>
+                    <option value="15">15 Rows</option>
+                    <option value="20">20 Rows</option>
+                    <option value="25">25 Rows</option>
+                  </select> 
+                </div>
+  
+                <!-- Search form -->
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                  <form class="form-inline md-form form-sm">
+                    <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search" 
+                     (keyup.enter)="SearchEnter()"
+                    
+                    >
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </form>
+                </div>
+  
               </div>
-
             </div>
-          </div>
-          <br/>
+            <br/>
+  
+            <!--Data grid sách-->
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-top: 10px">
+              <kendo-grid 
+                  [data]="gridView" 
+                  [height]="410" 
+                  
+                  [pageSize]="selectedPageSize" [skip]="skip" 
+                  [pageable]="true" 
+                  (pageChange)="pageChange($event)"
 
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-top: 10px">
-            <kendo-grid [data]="gridData" [height]="410">
-              <kendo-grid-column field="BookName" title="Tựa sách" width="250">
-              </kendo-grid-column>
-              <kendo-grid-column field="BookPrice" title="Giá" width="200">
-              </kendo-grid-column>
-              <kendo-grid-column field="BookQuantity" title="Số lượng" width="180 ">
-              </kendo-grid-column>
-              <kendo-grid-column field="BookImage" title="Hình" width="">
-              </kendo-grid-column>
-              <kendo-grid-column field="BookStatus" title="Trạng thái" width="180">
-              </kendo-grid-column>
-              <kendo-grid-column field="Discontinued" title="" width="250">
-                <ng-template kendoGridCellTemplate let-dataItem>
-                  <button type="button" class="btn btn-primary btn-circle btn-md" style="background-color: rgb(57, 148, 233)">
-                    <i class="glyphicon glyphicon-pencil"></i>
-                  </button>
-                  <button type="button" class="btn btn-info btn-circle btn-md" style="background-color: rgb(38, 202, 120)">
-                    <i class="glyphicon glyphicon-option-vertical"></i>
-                  </button>
-                  <button type="button" class="btn btn-danger btn-circle btn-md">
-                    <i class="glyphicon glyphicon-remove"></i>
-                  </button>
-                </ng-template>
-              </kendo-grid-column>
-            </kendo-grid>
-          </div>
+                >
+                <kendo-grid-column field="Title" title="Tựa sách" width="250">
+                  </kendo-grid-column>
+                  <kendo-grid-column field="Price" title="Giá" width="200">
+                  </kendo-grid-column>
+                  <kendo-grid-column field="Quantity" title="Số lượng" width="180 ">
+                  </kendo-grid-column>
+                  <kendo-grid-column field="ImgUrl" title="Hình" width="">
+                  </kendo-grid-column>
+                  <kendo-grid-column field="BookStatus" title="Trạng thái" width="180">
+                  </kendo-grid-column>
+                  <kendo-grid-column field="Discontinued" title="" width="250">
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                      <button type="button" class="btn btn-primary btn-circle btn-md" style="background-color: rgb(57, 148, 233)">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                      </button>
+                      <button type="button" class="btn btn-info btn-circle btn-md" style="background-color: rgb(38, 202, 120)">
+                        <i class="glyphicon glyphicon-option-vertical"></i>
+                      </button>
+                      <button type="button" class="btn btn-danger btn-circle btn-md">
+                        <i class="glyphicon glyphicon-remove"></i>
+                      </button>
+                    </ng-template>
+                  </kendo-grid-column>    
 
+              </kendo-grid>
+            </div>
+  
+          </div>
+  
         </div>
-
+  
       </div>
-
     </div>
   </div>
-</div>
+  
+  
+  

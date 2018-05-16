@@ -38,6 +38,11 @@ export class AuthorService {
 
   /* get authors */
   getAuthorPage(pageNo: number, pagesize: number, lookfor: string) {
-    return this.http.get(this.API + "?currentPage=" + pageNo +"&pageSize=" + pagesize +"&lookfor=" +lookfor).map((res: Response) => res.json());
+    return this.http.get(this.API + "?currentPage=" + pageNo + "&pageSize=" + pagesize + "&lookfor=" + lookfor).map((res: Response) => res.json());
+  }
+
+  /* get author (Name, ID) */
+  getAuthorIDName() {
+    return this.share.get<Author>(this.API + "/getID_Name");
   }
 }

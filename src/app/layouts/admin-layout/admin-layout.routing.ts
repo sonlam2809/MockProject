@@ -8,7 +8,7 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
-import { BooklistComponent } from '../../book-management/booklist/booklist.component';
+
 import { AddNewBookComponent } from '../../book-management/add-new-book/add-new-book.component';
 
 import { PublisherListComponent } from '../../publisher-management/publisher-list/publisher-list.component';
@@ -20,6 +20,8 @@ import { CategoryEditComponent } from '../../category-management/category-edit/c
 import { Component } from '@angular/core';
 
 import { AuthorListComponent } from '../../author-management/author-list/author-list.component';
+
+import { BookListComponent } from '../../book-management/booklist/booklist.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -65,7 +67,7 @@ export const AdminLayoutRoutes: Routes = [
     //     }]
     // }
     { path: 'dashboard', component: DashboardComponent },
-    { path: 'list-book', component: BooklistComponent },
+    { path: 'list-book', component: BookListComponent },
     { path: 'logout', component: MapsComponent },
     { path: 'notifications', component: NotificationsComponent },
     { path: 'upgrade', component: UpgradeComponent },

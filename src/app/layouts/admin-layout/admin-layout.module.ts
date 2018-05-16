@@ -28,8 +28,6 @@ import {
   MatTooltipModule,
 } from '@angular/material';
 
-import { BooklistComponent } from '../../book-management/booklist/booklist.component';
-
 import { ShareService } from '../../services/share.service';
 import { DialogModule } from '@progress/kendo-angular-dialog';
 
@@ -47,6 +45,12 @@ import { PublisherListComponent } from '../../publisher-management/publisher-lis
 import { PublisherListModule } from '../../publisher-management/publisher-list/publisher-list.module';
 import { PublisherService } from '../../services/publisher.service';
 import { PublisherEditComponent } from '../../publisher-management/publisher-edit/publisher-edit.component';
+
+import { BookService } from '../../services/book.service';
+
+
+import { BookListModule } from '../../book-management/booklist/book-list.module';
+import { BookListComponent } from '../../book-management/booklist/booklist.component';
 
 @NgModule({
   imports: [
@@ -69,6 +73,7 @@ import { PublisherEditComponent } from '../../publisher-management/publisher-edi
     AuthorListModule,
     PublisherListModule,
     
+    BookListModule,
   ],
   declarations: [
     DashboardComponent,
@@ -79,7 +84,7 @@ import { PublisherEditComponent } from '../../publisher-management/publisher-edi
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
-    BooklistComponent,
+
     AddNewBookComponent,
     
     CategoryListComponent,
@@ -89,14 +94,17 @@ import { PublisherEditComponent } from '../../publisher-management/publisher-edi
     AuthorEditComponent,
 
     PublisherListComponent,
-    PublisherEditComponent
+    PublisherEditComponent,
+
+    BookListComponent
     
   ],
   providers: [
     CategoryService,
     AuthorService,
     PublisherService,
-    ShareService
+    ShareService,
+    BookService
   ]
 })
 

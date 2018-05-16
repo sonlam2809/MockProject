@@ -39,4 +39,9 @@ export class CategoryService {
   getCategoryPage(pageNo: number, pagesize: number, lookfor: string) {
     return this.http.get(this.API + "?currentPage=" + pageNo +"&pageSize=" + pagesize +"&lookfor=" +lookfor).map((res: Response) => res.json());
   }
+
+  /* get categories (Name, ID) */
+  getCategoryIDName(){
+    return this.share.get<Category>(this.API + "/getID_Name");
+  }
 }
