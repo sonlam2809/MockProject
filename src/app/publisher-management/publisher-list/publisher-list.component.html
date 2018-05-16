@@ -10,21 +10,33 @@
           <div class="row" style="background-color: white">
   
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 10px 0px 10px 15px">
-              <button kendoButton (click)="onAddPublisherClick()" [primary]=true class="btn-them-nxb" data-toggle="modal" data-target="#exampleModalCenter">Thêm nhà xuất bản</button>
+              <button kendoButton [primary]=true class="btn-them-nha-nxb" data-toggle="modal" data-target="#exampleModalCenter">Thêm nhà xuất bản</button>
             </div>
   
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
               <div class="row">
   
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                  <kendo-combobox [data]="listItems" [value]="'Basketball'">
-                  </kendo-combobox>
+                  <select class="btn btn-primary dropdown-toggle" [(ngModel)]="selectedPageSize" (change)="loadItems()">
+                    <option value="2">2 Rows</option>
+                    <option value="3">3 Rows</option>
+                    <option value="5">5 Rows</option>
+                    <option value="10">10 Rows</option>
+                    <option value="15">15 Rows</option>
+                    <option value="20">20 Rows</option>
+                    <option value="25">25 Rows</option>
+                  </select> 
                 </div>
   
                 <!-- Search form -->
                 <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                   <form class="form-inline md-form form-sm">
-                    <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search">
+                    <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search" 
+                    [(ngModel)]="searchText" 
+                    (keyup.enter)="SearchEnter()"
+                    [ngModelOptions]="{standalone: true}"
+                    
+                    >
                     <i class="fa fa-search" aria-hidden="true"></i>
                   </form>
                 </div>
@@ -33,21 +45,47 @@
             </div>
             <br/>
   
+            <!--Data grid tác giả-->
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-top: 10px">
-              <kendo-grid [data]="gridData" [height]="410">
-                <kendo-grid-column field="PublisherName" title="Họ tên tác giả" width="300">
+  
+              <label class="k-form-field">
+                <input class="k-checkbox" type="checkbox" id="allowUnsort" [(ngModel)]="allowUnsort" />
+                <label class="k-checkbox-label" for="allowUnsort">
+                  {{ allowUnsort ? 'Disable': 'Enable' }} unsorting
+                </label>
+              </label>
+              <br/>
+              <label class="k-form-field">
+                <input class="k-checkbox" type="checkbox" id="multiple" [(ngModel)]="multiple" />
+                <label class="k-checkbox-label" for="multiple">
+                  {{ multiple ? 'Disable': 'Enable' }} multiple columns sorting
+                </label>
+              </label>
+  
+              <kendo-grid 
+                  [data]="gridView" 
+                  [height]="410" 
+                  
+                  [pageSize]="selectedPageSize" [skip]="skip" 
+                  [pageable]="true" 
+                  (pageChange)="pageChange($event)"
+                  
+                  (edit)="editHandler($event)" (remove)="removeHandler($event)"
+                  (add)="addHandler($event)"
+                >
+                <kendo-grid-column field="Name" title="Tên nhà xuất bản" width="300">
                 </kendo-grid-column>
-                <kendo-grid-column field="PublisherHistory" title="History" width="">
+                <kendo-grid-column field="Description" title="History" width="">
                 </kendo-grid-column>
                 <kendo-grid-column field="Discontinued" title="" width="300">
                   <ng-template kendoGridCellTemplate let-dataItem>
-                    <button type="button" class="btn btn-primary btn-circle btn-md" style="background-color: rgb(57, 148, 233)">
+                    <button kendoGridEditCommand [primary]="true" class="btn btn-primary btn-circle btn-md" style="background-color: rgb(57, 148, 233)">
                       <i class="glyphicon glyphicon-pencil"></i>
                     </button>
                     <button type="button" class="btn btn-info btn-circle btn-md" style="background-color: rgb(38, 202, 120)">
                       <i class="glyphicon glyphicon-option-vertical"></i>
                     </button>
-                    <button type="button" class="btn btn-danger btn-circle btn-md">
+                    <button type="button" class="btn btn-danger btn-circle btn-md" (click)="onClickDeletePublisher(dataItem.PublisherID)">
                       <i class="glyphicon glyphicon-remove"></i>
                     </button>
                   </ng-template>
@@ -62,3 +100,53 @@
       </div>
     </div>
   </div>
+  
+  <!--Pop up thêm mới tác giả-->
+  <div class="main-content" style="font-size: 16px">
+    <div class="container-fluid">
+      <div class="row" style="font-size: 16px">
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLongTitle">Thêm nhà xuất bản mới</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+  
+                <form action="" method="POST" role="form">
+                  <legend></legend>
+  
+                  <div class="form-group">
+                    <label for="">Tên nhà xuất bản</label>
+                    <input type="text" class="form-control" id="Name" placeholder="" [(ngModel)]="_publisher.Name" [ngModelOptions]="{standalone: true}">
+                    <label for="">Description</label>
+                    <input type="text" class="form-control" id="Description" placeholder="" [(ngModel)]="_publisher.Description" [ngModelOptions]="{standalone: true}">
+                  </div>
+  
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onBackPublisherListClick()" style="font-size: 16px;">Quay lại</button>
+                  <button type="submit" class="btn btn-primary" style="font-size: 16px;" (click)="onAddNewPublisher()">Thêm</button>
+                </form>
+  
+              </div>
+              <!-- <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<!--Popup edit Publisher-->
+
+<publisher-edit
+[model]="editDataItem" 
+[isNew]="isNew" 
+(save)="saveHandler($event)" 
+(cancel)="cancelHandler()">
+</publisher-edit>

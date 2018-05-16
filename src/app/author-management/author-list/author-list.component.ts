@@ -125,6 +125,5 @@ export class AuthorListComponent implements OnInit {
     }
 
     private searchText = "";
-
 }
 

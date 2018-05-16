@@ -17,7 +17,6 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 
 import { AddNewBookComponent } from '../../book-management/add-new-book/add-new-book.component';
-import { AddNewPublisherComponent } from '../../publisher-management/add-new-publisher/add-new-publisher.component';
 
 import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
@@ -31,8 +30,6 @@ import {
 
 import { BooklistComponent } from '../../book-management/booklist/booklist.component';
 
-import { PublisherListComponent } from '../../publisher-management/publisher-list/publisher-list.component';
-
 import { ShareService } from '../../services/share.service';
 import { DialogModule } from '@progress/kendo-angular-dialog';
 
@@ -43,9 +40,13 @@ import { CategoryListComponent } from '../../category-management/category-list/c
 
 import { AuthorListModule } from '../../author-management/author-list/author-list.module';
 import { AuthorListComponent } from '../../author-management/author-list/author-list.component';
+import { AuthorEditComponent } from '../../author-management/author-edit/author-edit.component';
+import { AuthorService } from '../../services/author.service';
 
-
-
+import { PublisherListComponent } from '../../publisher-management/publisher-list/publisher-list.component';
+import { PublisherListModule } from '../../publisher-management/publisher-list/publisher-list.module';
+import { PublisherService } from '../../services/publisher.service';
+import { PublisherEditComponent } from '../../publisher-management/publisher-edit/publisher-edit.component';
 
 @NgModule({
   imports: [
@@ -66,6 +67,7 @@ import { AuthorListComponent } from '../../author-management/author-list/author-
 
     CategoryListModule,
     AuthorListModule,
+    PublisherListModule,
     
   ],
   declarations: [
@@ -79,17 +81,21 @@ import { AuthorListComponent } from '../../author-management/author-list/author-
     UpgradeComponent,
     BooklistComponent,
     AddNewBookComponent,
-    PublisherListComponent,
-    AddNewPublisherComponent,
+    
     CategoryListComponent,
     CategoryEditComponent,
+
     AuthorListComponent,
-    
+    AuthorEditComponent,
+
+    PublisherListComponent,
+    PublisherEditComponent
     
   ],
   providers: [
     CategoryService,
-    
+    AuthorService,
+    PublisherService,
     ShareService
   ]
 })

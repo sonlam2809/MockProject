@@ -12,7 +12,6 @@ import { BooklistComponent } from '../../book-management/booklist/booklist.compo
 import { AddNewBookComponent } from '../../book-management/add-new-book/add-new-book.component';
 
 import { PublisherListComponent } from '../../publisher-management/publisher-list/publisher-list.component';
-import { AddNewPublisherComponent } from '../../publisher-management/add-new-publisher/add-new-publisher.component';
 
 import { CategoryListComponent } from '../../category-management/category-list/category-list.component';
 import { CategoryEditComponent } from '../../category-management/category-edit/category-edit.component';
@@ -73,7 +72,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'add-new-book', component: AddNewBookComponent },
     { path: 'list-author', component: AuthorListComponent },
     { path: 'list-publisher', component: PublisherListComponent },
-    { path: 'add-new-publisher', component: AddNewPublisherComponent },
     {
         path: 'list-category', component: CategoryListComponent,
         // children: [

@@ -144,4 +144,10 @@
   
   <!--Popup edit Author-->
 
-  
+<!--Popup edit author-->
+<author-edit 
+  [model]="editDataItem" 
+  [isNew]="isNew" 
+  (save)="saveHandler($event)" 
+  (cancel)="cancelHandler()">
+</author-edit>
