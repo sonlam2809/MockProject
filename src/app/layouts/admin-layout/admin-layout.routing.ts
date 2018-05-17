@@ -22,6 +22,7 @@ import { Component } from '@angular/core';
 import { AuthorListComponent } from '../../author-management/author-list/author-list.component';
 
 import { BookListComponent } from '../../book-management/booklist/booklist.component';
+import { BookEditComponent } from '../../book-management/book-edit/book-edit.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -91,4 +92,5 @@ export const AdminLayoutRoutes: Routes = [
         //     }
         // ]
     },
+    { path: 'edit-book', component: BookEditComponent },
 ];

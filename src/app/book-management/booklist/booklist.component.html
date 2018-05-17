@@ -32,8 +32,8 @@
                 <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                   <form class="form-inline md-form form-sm">
                     <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search" 
-                     (keyup.enter)="SearchEnter()"
-                    
+                     [(ngModel)]="searchText" (keyup.enter)="SearchEnter()"
+                     [ngModelOptions]="{standalone: true}"
                     >
                     <i class="fa fa-search" aria-hidden="true"></i>
                   </form>
@@ -53,6 +53,8 @@
                   [pageable]="true" 
                   (pageChange)="pageChange($event)"
 
+                  (edit)="editHandler($event)" 
+
                 >
                 <kendo-grid-column field="Title" title="Tựa sách" width="250">
                   </kendo-grid-column>
@@ -66,7 +68,7 @@
                   </kendo-grid-column>
                   <kendo-grid-column field="Discontinued" title="" width="250">
                     <ng-template kendoGridCellTemplate let-dataItem>
-                      <button type="button" class="btn btn-primary btn-circle btn-md" style="background-color: rgb(57, 148, 233)">
+                      <button kendoGridEditCommand class="btn btn-primary btn-circle btn-md" style="background-color: rgb(57, 148, 233)">
                         <i class="glyphicon glyphicon-pencil"></i>
                       </button>
                       <button type="button" class="btn btn-info btn-circle btn-md" style="background-color: rgb(38, 202, 120)">

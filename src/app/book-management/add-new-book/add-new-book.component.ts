@@ -6,6 +6,7 @@ import { Book } from '../../model/book';
 import { CategoryService } from '../../services/category.service';
 import { AuthorService } from '../../services/author.service';
 import { PublisherService } from '../../services/publisher.service';
+import { GridDataResult } from '@progress/kendo-angular-grid';
 
 
 @Component({
@@ -25,6 +26,8 @@ export class AddNewBookComponent implements OnInit {
 
   public _book: Book;
 
+  public _listEditBook: GridDataResult;
+
   constructor(
     private router: Router,
     private bookService: BookService,
@@ -34,6 +37,7 @@ export class AddNewBookComponent implements OnInit {
   ) 
   { 
     this._book = new Book();
+    //this._listEditBook = bo
   }
 
   ngOnInit() {
@@ -76,8 +80,9 @@ export class AddNewBookComponent implements OnInit {
 
 
   handleInputFile(file: FileList){
+    console.log(Date.toString());
     this.fileToUpload = file.item(0);
-    this._book.ImgUrl = "/" + this.fileToUpload.name;
+    this._book.ImgUrl = "http://localhost:8964/Image/" + this.fileToUpload.name ;
     //Show image preview
     var reader = new FileReader();
     reader.onload = (event: any) => {

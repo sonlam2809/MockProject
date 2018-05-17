@@ -51,6 +51,8 @@ import { BookService } from '../../services/book.service';
 
 import { BookListModule } from '../../book-management/booklist/book-list.module';
 import { BookListComponent } from '../../book-management/booklist/booklist.component';
+//import { ShareDataService } from '../../services/share-data.service';
+import { BookEditComponent } from '../../book-management/book-edit/book-edit.component';
 
 @NgModule({
   imports: [
@@ -96,7 +98,8 @@ import { BookListComponent } from '../../book-management/booklist/booklist.compo
     PublisherListComponent,
     PublisherEditComponent,
 
-    BookListComponent
+    BookListComponent,
+    BookEditComponent,
     
   ],
   providers: [
@@ -104,7 +107,8 @@ import { BookListComponent } from '../../book-management/booklist/booklist.compo
     AuthorService,
     PublisherService,
     ShareService,
-    BookService
+    BookService,
+    
   ]
 })
 

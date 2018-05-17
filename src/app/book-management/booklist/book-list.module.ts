@@ -6,6 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from '@progress/kendo-angular-dialog';
 
 import { BookService } from '../../services/book.service';
+import { ShareDataService } from '../../services/share-data.service';
+
 
 
 @NgModule({
@@ -18,11 +20,12 @@ import { BookService } from '../../services/book.service';
     
   ],
   declarations: [
-
+    
   ],
   providers: [
     
-    BookService
+    BookService,
+    ShareDataService,
   ]
 })
 

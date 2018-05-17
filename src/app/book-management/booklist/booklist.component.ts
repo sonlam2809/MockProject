@@ -10,6 +10,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { BookService } from '../../services/book.service';
 import { Book } from '../../model/book';
+import { ShareDataService } from '../../services/share-data.service';
 
 
 @Component({
@@ -27,7 +28,7 @@ export class BookListComponent implements OnInit {
   //kendo grid data
   public gridView: GridDataResult;
 
-  constructor(private router: Router, public bookService: BookService) {
+  constructor(private router: Router, public bookService: BookService, private shareDataService: ShareDataService) {
     this._book = new Book();
 
   }
@@ -64,11 +65,23 @@ export class BookListComponent implements OnInit {
   }
 
   /* Search */
-  SearchEnter(){
+  SearchEnter() {
     this.loadItems();
   }
 
   private searchText = "";
+
+  /* Edit Book */
+  public editDataItem: Book;
+  public isNew: boolean;
+  public editHandler({ dataItem }) {
+    console.log(dataItem);
+    //this.editDataItem = dataItem;
+    this.shareDataService.book = dataItem;
+    this.isNew = false;
+    this.router.navigateByUrl("/edit-book");
+    //console.log("cai con c"+this.editDataItem.Title);
+  }
 
 }
 

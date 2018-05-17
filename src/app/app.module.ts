@@ -27,6 +27,7 @@ import { LoginComponent } from './components/login/login.component';
 
 
 
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -43,6 +44,7 @@ import { LoginComponent } from './components/login/login.component';
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
+    
     
   ],
   providers: [],
