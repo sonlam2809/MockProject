@@ -21,15 +21,20 @@ export class AddNewBookComponent implements OnInit {
   public listBookStatus: Array<string>;
 
   public imgUrl: string = "http://placehold.it/500";
-  public fileToUpload: File = null; 
+  public fileToUpload: File = null;
+
+  public _book: Book;
 
   constructor(
     private router: Router,
     private bookService: BookService,
     private cateService: CategoryService,
     private authorService: AuthorService,
-    private publisherService: PublisherService
-  ) { }
+    private publisherService: PublisherService,
+  ) 
+  { 
+    this._book = new Book();
+  }
 
   ngOnInit() {
     this.loadCategoryDropDown();
@@ -72,13 +77,14 @@ export class AddNewBookComponent implements OnInit {
 
   handleInputFile(file: FileList){
     this.fileToUpload = file.item(0);
-
+    this._book.ImgUrl = "/" + this.fileToUpload.name;
     //Show image preview
     var reader = new FileReader();
     reader.onload = (event: any) => {
       this.imgUrl = event.target.result;
     }
     reader.readAsDataURL(this.fileToUpload);
+    //console.log(this.imgUrl);
   }
 
 
@@ -89,6 +95,18 @@ export class AddNewBookComponent implements OnInit {
       this.imgUrl = "http://placehold.it/500";
     });
   }
+
   /* add new book */
+  onAddNewBook() {
+    this.bookService.postBook(this._book).subscribe(x => {
+      alert("Thêm mới sách thành công!");
+      this.router.navigateByUrl("/add-new-book");
+    });
+  }
+
+  // testaa(){
+  //   console.log(this._book.CateID);
+  // }
+
 
 }

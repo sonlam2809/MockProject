@@ -11,4 +11,5 @@ export class Book {
     CreateDay: Date;
     ModifiedDay: Date;
     IsActive: number;
+    BookStatusID: number;
 }

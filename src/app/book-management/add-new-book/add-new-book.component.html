@@ -17,41 +17,41 @@
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <form class="example-form">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Tựa sách" value="" style="font-size: 16px">
+                <input matInput placeholder="Tựa sách" value="" style="font-size: 16px" [(ngModel)]="_book.Title" [ngModelOptions]="{standalone: true}">
               </mat-form-field>
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Mô tả" value="">
+                <input matInput placeholder="Mô tả" value="" [(ngModel)]="_book.Summary" [ngModelOptions]="{standalone: true}">
               </mat-form-field>
               <mat-form-field>
-                <mat-select placeholder="Chọn danh mục">
-                  <mat-option *ngFor="let category of listCategory" value="category.CateID">
+                <mat-select placeholder="Chọn danh mục" [(ngModel)]="_book.CateID" [ngModelOptions]="{standalone: true}">
+                  <mat-option *ngFor="let category of listCategory" [value]="category.CateID">
                     {{category.CateName}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field>
-                <mat-select placeholder="Chọn tác giả">
-                  <mat-option *ngFor="let author of listAuthor" value="author.AuthorID">
+                <mat-select placeholder="Chọn tác giả" [(ngModel)]="_book.AuthorID" [ngModelOptions]="{standalone: true}">
+                  <mat-option *ngFor="let author of listAuthor" [value]="author.AuthorID">
                     {{author.AuthorName}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field>
-                <mat-select placeholder="Chọn nhà xuất bản">
-                  <mat-option *ngFor="let publisher of listPublisher" value="publisher.PubID">
+                <mat-select placeholder="Chọn nhà xuất bản" [(ngModel)]="_book.PubID" [ngModelOptions]="{standalone: true}">
+                  <mat-option *ngFor="let publisher of listPublisher" [value]="publisher.PubID">
                     {{publisher.Name}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Giá" value="">
+                <input matInput placeholder="Giá" value="" [(ngModel)]="_book.Price" [ngModelOptions]="{standalone: true}">
               </mat-form-field>
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Số lượng" value="">
+                <input matInput placeholder="Số lượng" value="" [(ngModel)]="_book.Quantity" [ngModelOptions]="{standalone: true}">
               </mat-form-field>
               <mat-form-field>
-                <mat-select placeholder="Trạng thái">
-                  <mat-option *ngFor="let bookstatus of listBookStatus" value="bookstatus.BookStatusID">
+                <mat-select placeholder="Trạng thái" [(ngModel)]="_book.BookStatusID" [ngModelOptions]="{standalone: true}">
+                  <mat-option *ngFor="let bookstatus of listBookStatus" [value]="bookstatus.BookStatusID">
                     {{bookstatus.BookStatus}}
                   </mat-option>
                 </mat-select>
@@ -60,7 +60,7 @@
               <div class="row">
                 <button type="button" class="btn btn-danger btn-lg" (click)="OnBackClick()" style="font-size: 16px;">
                   <span class="glyphicon glyphicon-arrow-left"></span> Quay lại</button>
-                <button type="button" class="btn btn-success btn-lg" style="font-size: 16px;">
+                <button type="button" class="btn btn-success btn-lg" style="font-size: 16px;" (click)="onAddNewBook()">
                   <span class="glyphicon glyphicon-arrow-right"></span> Tạo</button>
               </div>
 
@@ -79,7 +79,7 @@
                 <button type="Submit" class="btn btn-sm btn-default" [disabled]="Image.value==''" style="font-size: 16px; background-color: rgb(15, 153, 107);">Submit</button>
               </div>
             </form>
-            
+          
           </div>
 
         </div>
