@@ -75,7 +75,7 @@ export class BookListComponent implements OnInit {
   public editDataItem: Book;
   public isNew: boolean;
   public editHandler({ dataItem }) {
-    console.log(dataItem);
+    //console.log(dataItem);
     //this.editDataItem = dataItem;
     this.shareDataService.book = dataItem;
     this.isNew = false;
