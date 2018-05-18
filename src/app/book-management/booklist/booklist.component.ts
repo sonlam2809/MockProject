@@ -81,7 +81,13 @@ export class BookListComponent implements OnInit {
     this.isNew = false;
     this.router.navigateByUrl("/edit-book");
     //console.log("cai con c"+this.editDataItem.Title);
+    //console.log("this.sharedataservice........"+this.shareDataService.book.PubID);
   }
+
+  /* Remove book */
+  // RemoveBook(bookID: number): Observable<Book>{
+  //   return this.bookService.removeBook(bookID).subscribe
+  // }
 
 }
 

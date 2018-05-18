@@ -15,42 +15,45 @@
           </div>
 
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <form class="example-form">
+            <form class="example-form" >
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Tựa sách" value="" style="font-size: 16px" [(ngModel)]="newbook.Title" [ngModelOptions]="{standalone: true}">
+                <input matInput placeholder="Tựa sách" value="" style="font-size: 16px"  [(ngModel)] ="bookEdit.Title" [ngModelOptions]="{standalone: true}">
+               
+            
+                
               </mat-form-field>
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Mô tả" value="" [(ngModel)]="newbook.Summary" [ngModelOptions]="{standalone: true}">
+                <input matInput placeholder="Mô tả" value="" [(ngModel)]="bookEdit.Summary" [ngModelOptions]="{standalone: true}">
               </mat-form-field>
               <mat-form-field>
-                <mat-select placeholder="Chọn danh mục" [(ngModel)]="newbook.CateID" [ngModelOptions]="{standalone: true}">
+                <mat-select placeholder="Chọn danh mục"  [(ngModel)]="bookEdit.CateID" [ngModelOptions]="{standalone: true}">
                   <mat-option *ngFor="let category of listCategory" [value]="category.CateID">
                     {{category.CateName}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field>
-                <mat-select placeholder="Chọn tác giả" [(ngModel)]="newbook.AuthorID" [ngModelOptions]="{standalone: true}">
+                <mat-select placeholder="Chọn tác giả" [(ngModel)]="bookEdit.AuthorID" [ngModelOptions]="{standalone: true}">
                   <mat-option *ngFor="let author of listAuthor" [value]="author.AuthorID">
-                    {{author.AuthorName}}
-                  </mat-option>
+                      {{author.AuthorName}}
+                    </mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field>
-                <mat-select placeholder="Chọn nhà xuất bản" [(ngModel)]="newbook.PubID" [ngModelOptions]="{standalone: true}">
+                <mat-select placeholder="Chọn nhà xuất bản" [(ngModel)]="bookEdit.PubID" [ngModelOptions]="{standalone: true}">
                   <mat-option *ngFor="let publisher of listPublisher" [value]="publisher.PubID">
                     {{publisher.Name}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Giá" value="" [(ngModel)]="newbook.Price" [ngModelOptions]="{standalone: true}">
+                <input matInput placeholder="Giá" value="" [(ngModel)]="bookEdit.Price" [ngModelOptions]="{standalone: true}">
               </mat-form-field>
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Số lượng" value="" [(ngModel)]="newbook.Quantity" [ngModelOptions]="{standalone: true}">
+                <input matInput placeholder="Số lượng" value="" [(ngModel)]="bookEdit.Quantity" [ngModelOptions]="{standalone: true}">
               </mat-form-field>
               <mat-form-field>
-                <mat-select placeholder="Trạng thái" [(ngModel)]="newbook.BookStatusID" [ngModelOptions]="{standalone: true}">
+                <mat-select placeholder="Trạng thái" [(ngModel)]="bookEdit.BookStatusID" [ngModelOptions]="{standalone: true}">
                   <mat-option *ngFor="let bookstatus of listBookStatus" [value]="bookstatus.BookStatusID">
                     {{bookstatus.BookStatus}}
                   </mat-option>
@@ -60,24 +63,22 @@
               <div class="row">
                 <button type="button" class="btn btn-danger btn-lg" (click)="OnBackClick()" style="font-size: 16px;">
                   <span class="glyphicon glyphicon-arrow-left"></span> Quay lại</button>
-                <button type="button" class="btn btn-success btn-lg" style="font-size: 16px;" (click)="onAddNewBook()">
-                  <span class="glyphicon glyphicon-arrow-right"></span> Tạo</button>
+                <button type="button" class="btn btn-success btn-lg" style="font-size: 16px;" (click)="OnSubmit(Image); onEditBook()">
+                  <span class="glyphicon glyphicon-arrow-right"></span> Sửa</button>
               </div>
 
             </form>
           </div>
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <form #imageForm=ngForm (ngSubmit)="OnSubmit(Image)">
+            <form #imageForm=ngForm >
               <div class="row">
-                <img [src]="imgUrl" class="img-responsive" alt="Image" style="height: 500px; max-width: 100%;">
+                <img [src]="previewImageUrl" class="img-responsive" alt="Image" style="height: 500px; max-width: 100%;" >
               </div>
 
               <div class="row">
-                <input type="file" #Image accept="image/*" (change)="handleInputFile($event.target.files);" />
+                <input type="file" #Image accept="image/*" (change)="handleInputFile($event.target.files); onFileChange($event)" />
               </div>
-              <div class="row">
-                <button type="Submit" class="btn btn-sm btn-default" [disabled]="Image.value==''" style="font-size: 16px; background-color: rgb(15, 153, 107);">Submit</button>
-              </div>
+              
             </form>
           
           </div>

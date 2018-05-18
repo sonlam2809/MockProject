@@ -1,5 +1,6 @@
 
 export class Book {
+    BookID: number;
     Title: string;
     CateID: number;
     AuthorID: number;

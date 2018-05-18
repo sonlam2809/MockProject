@@ -16,55 +16,46 @@ import { PublisherService } from '../../services/publisher.service';
 export class BookEditComponent implements OnInit {
 
   public bookEdit: Book;
-  public myform: FormGroup;
-  public newbook: Book;
 
   public listCategory: Array<string>;
   public listAuthor: Array<string>;
   public listPublisher: Array<string>;
   public listBookStatus: Array<string>;
 
-  public imgUrl: string = "http://placehold.it/500";
+  public previewImageUrl: string = "http://placehold.it/500";
   public fileToUpload: File = null;
 
+  private isOnFileChange: boolean;
+
   constructor(
-    private sharedataService: ShareDataService, 
+    private sharedataService: ShareDataService,
     private formBuilder: FormBuilder,
     private router: Router,
     private bookService: BookService,
     private cateService: CategoryService,
     private authorService: AuthorService,
     private publisherService: PublisherService,
-  ) 
-  {
+  ) {
     this.bookEdit = new Book();
-    this.newbook = new Book();
-    
-
   }
 
   ngOnInit() {
-    this.bookEdit = this.sharedataService.book;
-    //console.log("Book edit" + this.bookEdit);
-    this.myform = new FormGroup({
-      Title: new FormControl(this.bookEdit.Title, Validators.required),
-      Summary: new FormControl(this.bookEdit.Summary, Validators.required),
-
-      CategoryID: new FormControl(this.bookEdit.CateID, Validators.required),
-      AuthorID: new FormControl(this.bookEdit.AuthorID, Validators.required),
-      PublisherID: new FormControl(this.bookEdit.PubID, Validators.required),
-      Price: new FormControl(this.bookEdit.Price, Validators.required),
-      Quantity: new FormControl(this.bookEdit.Quantity, Validators.required),
-      BookStatusID: new FormControl(this.bookEdit.BookStatusID, Validators.required)
-    });
-
-    console.log(this.myform.value);
-    //this.myform.reset();
-
     this.loadCategoryDropDown();
     this.loadAuthorDropDown();
     this.loadPublisherDropDown();
     this.loadBookStatusDropDown();
+
+    console.log('book share');
+    console.log(this.sharedataService.book);
+    this.bookEdit = this.sharedataService.book;
+    //console.log("Book edit" + this.bookEdit);
+
+    console.log('book edit');
+    console.log(this.bookEdit);
+
+
+    //thay the previewImage get tu server
+    this.previewImageUrl = this.bookEdit.ImgUrl;
   }
   onSubmit(): void {
     console.log("xxx");
@@ -98,30 +89,50 @@ export class BookEditComponent implements OnInit {
     });
   }
 
-  OnBackClick(){
+  OnBackClick() {
     this.router.navigateByUrl("/list-book");
   }
 
-  handleInputFile(file: FileList){
+  handleInputFile(file: FileList) {
     console.log(Date.toString());
     this.fileToUpload = file.item(0);
-    this.newbook.ImgUrl = "http://localhost:8964/Image/" + this.fileToUpload.name ;
+
+    //link hinh moi de gui len server
+    this.previewImageUrl = "http://localhost:8964/Image/" + this.fileToUpload.name;
+
     //Show image preview
     var reader = new FileReader();
     reader.onload = (event: any) => {
-      this.imgUrl = event.target.result;
+      this.previewImageUrl = event.target.result;
     }
     reader.readAsDataURL(this.fileToUpload);
-    //console.log(this.imgUrl);
+  }
+  onEditBook() {
+    if (typeof this.previewImageUrl !== 'undefined' && this.previewImageUrl) {
+      this.bookEdit.ImgUrl = "http://localhost:8964/Image/" + this.fileToUpload.name;
+    }
+    this.bookService.updateBook(this.bookEdit.BookID, this.bookEdit).subscribe((x) => {
+      alert("Cập nhật thành công");
+    });
   }
 
+  /* submit edit book */
+  OnSubmit(Image) {
+    if (this.isOnFileChange) {
+      console.log(this.previewImageUrl);
+      this.bookEdit.ImgUrl = this.previewImageUrl;
+      this.bookService.postFile(this.fileToUpload).subscribe((x) => {
+        //console.log("Doneeeeeeeeeeeee");
+        Image.value = null;
+        this.previewImageUrl = "http://placehold.it/500";
+      });
+      this.router.navigateByUrl("/list-book");
+    }
 
-  OnSubmit(Image){
-    this.bookService.postFile(this.fileToUpload).subscribe((x)=>{
-      console.log("Doneeeeeeeeeeeee");
-      Image.value = null;
-      this.imgUrl = "http://placehold.it/500";
-    });
+  }
+
+  onFileChange(e) {
+    this.isOnFileChange = true;
   }
 
 }

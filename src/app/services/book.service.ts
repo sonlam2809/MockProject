@@ -57,10 +57,14 @@ export class BookService {
   /* post File */
   postFile(fileToUpload: File) {
     const formData: FormData = new FormData();
+    console.log("adkfapodfjaslkdfaslkdghlaksdj");
     formData.append('Image', fileToUpload, fileToUpload.name);
     console.log(formData);
     return this.httpClient.post(this.API + "/UploadImage", formData);
   }
 
-  
+  removeBook(bookId: number){
+    return this.http.get(this.API + "/Remove/" + bookId).map((res: Response) => res.json());
+  }
+
 }
