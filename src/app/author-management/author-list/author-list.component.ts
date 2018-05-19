@@ -9,6 +9,7 @@ import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { SortDescriptor, orderBy, State } from '@progress/kendo-data-query';
 import { Observable } from 'rxjs/Observable';
 import { AuthorService } from '../../services/author.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 
@@ -20,8 +21,8 @@ import { AuthorService } from '../../services/author.service';
 })
 export class AuthorListComponent implements OnInit {
 
-
-    public selectedPageSize = 3;
+    public selectedPageSize = 5;
+    public itemNumber: Array<number> = [3, 5, 10, 15];
     public author: Author[];
     public _author: Author;
 
@@ -46,8 +47,9 @@ export class AuthorListComponent implements OnInit {
     onAddNewAuthor() {
         this.authorService.postAuthor(this._author).subscribe(x => {
             alert("Thêm mới tác giả thành công!");
-            this.router.navigateByUrl("/list-author");
             this.loadItems();
+            document.getElementById('exampleModalCenter').click();
+            this.router.navigateByUrl("/list-author");
         });
     }
 
@@ -125,5 +127,7 @@ export class AuthorListComponent implements OnInit {
     }
 
     private searchText = "";
+
+
 }
 

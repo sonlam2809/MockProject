@@ -8,7 +8,6 @@ import { AuthorService } from '../../services/author.service';
 import { PublisherService } from '../../services/publisher.service';
 import { GridDataResult } from '@progress/kendo-angular-grid';
 
-
 @Component({
   selector: 'app-add-new-book',
   templateUrl: './add-new-book.component.html',
@@ -94,9 +93,9 @@ export class AddNewBookComponent implements OnInit {
 
 
   OnSubmit(Image){
+    console.log("Nhay vao ham nay Doneeeeeeeeeeeee");
     this.bookService.postFile(this.fileToUpload).subscribe((x)=>{
-      console.log("Doneeeeeeeeeeeee");
-      Image.value = null;
+      //Image.value = null;
       this.imgUrl = "http://placehold.it/500";
     });
   }
@@ -105,7 +104,7 @@ export class AddNewBookComponent implements OnInit {
   onAddNewBook() {
     this.bookService.postBook(this._book).subscribe(x => {
       alert("Thêm mới sách thành công!");
-      this.router.navigateByUrl("/add-new-book");
+      this.router.navigateByUrl("/list-book");
     });
   }
 

@@ -20,7 +20,8 @@ import { PublisherService } from '../../services/publisher.service';
 export class PublisherListComponent implements OnInit {
 
 
-    public selectedPageSize = 3;
+    public selectedPageSize = 5;
+    public itemNumber: Array<number> = [3, 5, 10, 15];
     public publisher: Publisher[];
     public _publisher: Publisher;
 
@@ -45,8 +46,9 @@ export class PublisherListComponent implements OnInit {
     onAddNewPublisher() {
         this.pubService.postPublisher(this._publisher).subscribe(x => {
             alert("Thêm mới nhà xuất bản thành công!");
-            this.router.navigateByUrl("/list-publisher");
             this.loadItems();
+            document.getElementById('exampleModalCenter').click();
+            this.router.navigateByUrl("/list-publisher");
         });
     }
 

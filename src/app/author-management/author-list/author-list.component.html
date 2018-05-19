@@ -16,17 +16,20 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
               <div class="row">
   
-                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                  <select class="btn btn-primary dropdown-toggle" [(ngModel)]="selectedPageSize" (change)="loadItems()" class="btn-them-tac-gia">
-                    <option value="2">2 Rows</option>
-                    <option value="3">3 Rows</option>
-                    <option value="5">5 Rows</option>
-                    <option value="10">10 Rows</option>
-                    <option value="15">15 Rows</option>
-                    <option value="20">20 Rows</option>
-                    <option value="25">25 Rows</option>
-                  </select> 
-                </div>
+                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style=" padding-top: 10px;">
+                      <select class="form-control" 
+                        [(ngModel)]="selectedPageSize" 
+                        (change)="onChange(selectedPageSize); loadItems()" 
+                        style="font-size: 16px;" 
+                        [ngModelOptions]="{standalone: true}"
+                      >
+                        <option value="" disabled selected>Chọn kích thước</option>
+                        <option *ngFor="let item of itemNumber" [value]="item">
+                          {{item}} rows
+                        </option>
+    
+                      </select> 
+                    </div>
   
                 <!-- Search form -->
                 <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
@@ -47,24 +50,10 @@
   
             <!--Data grid tác giả-->
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-top: 10px">
-  
-              <label class="k-form-field">
-                <input class="k-checkbox" type="checkbox" id="allowUnsort" [(ngModel)]="allowUnsort" />
-                <label class="k-checkbox-label" for="allowUnsort">
-                  {{ allowUnsort ? 'Disable': 'Enable' }} unsorting
-                </label>
-              </label>
-              <br/>
-              <label class="k-form-field">
-                <input class="k-checkbox" type="checkbox" id="multiple" [(ngModel)]="multiple" />
-                <label class="k-checkbox-label" for="multiple">
-                  {{ multiple ? 'Disable': 'Enable' }} multiple columns sorting
-                </label>
-              </label>
-  
+
               <kendo-grid 
                   [data]="gridView" 
-                  [height]="410" 
+                  [height]="600" 
                   
                   [pageSize]="selectedPageSize" [skip]="skip" 
                   [pageable]="true" 
@@ -116,25 +105,41 @@
               </div>
               <div class="modal-body">
   
-                <form action="" method="POST" role="form">
-                  <legend></legend>
-  
-                  <div class="form-group">
-                    <label for="">Tên tác giả</label>
-                    <input type="text" class="form-control" id="authorName" placeholder="" [(ngModel)]="_author.AuthorName" [ngModelOptions]="{standalone: true}">
-                    <label for="">History</label>
-                    <input type="text" class="form-control" id="authorHistory" placeholder="" [(ngModel)]="_author.History" [ngModelOptions]="{standalone: true}">
+                <form #authorForm="ngForm" (ngSubmit)="onAddNewAuthor()">
+
+                  <div class="form-group" 
+                    [class.has-error]="fullNameControl.invalid && fullNameControl.touched"
+                    [class.has-success]="fullNameControl.valid"  
+                  >
+                    <label class="control-label">Tên tác giả</label>
+                    <input required type="text" #fullNameControl="ngModel" class="form-control" id="authorName" [(ngModel)]="_author.AuthorName"  [ngModelOptions]="{standalone: true}">
+                      <span class="help-block" *ngIf="fullNameControl.invalid && fullNameControl.touched">
+                        Full name is required
+                      </span>
+                  </div>
+                  <div class="form-group" 
+                    [class.has-error]="HistoryControl.invalid && HistoryControl.touched"
+                    [class.has-success]="HistoryControl.valid"  
+                  >
+                    <label class="control-label">History</label>
+                    <input required type="text" #HistoryControl="ngModel" class="form-control" id="authorHistory" [(ngModel)]="_author.History" [ngModelOptions]="{standalone: true}">
+                      <span class="help-block" *ngIf="HistoryControl.invalid && HistoryControl.touched">
+                        History is required
+                      </span>
                   </div>
   
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onBackAuthorListClick()" style="font-size: 16px;">Quay lại</button>
-                  <button type="submit" class="btn btn-primary" style="font-size: 16px;" (click)="onAddNewAuthor()">Thêm</button>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onBackAuthorListClick()" style="font-size: 16px; background-color: rgb(238, 63, 63)">Quay lại</button>
+                    <button type="submit" ng-disabled="authorForm.$invalid" class="btn btn-primary"  style="font-size: 16px; background-color: rgb(21, 172, 121)" >Thêm</button>
+                  </div>
+                  
                 </form>
   
               </div>
               <!-- <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                      </div> -->
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" [disabled]="authorForm.invalid">Save changes</button>
+              </div> -->
             </div>
           </div>
         </div>

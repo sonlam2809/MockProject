@@ -15,13 +15,39 @@
           </div>
 
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <form class="example-form">
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="Tựa sách" value="" style="font-size: 16px" [(ngModel)]="_book.Title" [ngModelOptions]="{standalone: true}">
-              </mat-form-field>
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="Mô tả" value="" [(ngModel)]="_book.Summary" [ngModelOptions]="{standalone: true}">
-              </mat-form-field>
+            <form class="example-form" #addBookForm="ngForm">
+              
+              <div class="form-group input-effect" 
+                [class.has-error]="titleControl.invalid && titleControl.touched"
+                [class.has-success]="titleControl.valid"  
+              >
+                <label class="control-label">Tựa sách</label>
+                <input required type="text" class="effect-16 from-control example-full-width" style="font-size: 16px;"
+                  #titleControl="ngModel"
+                  [(ngModel)]="_book.Title" 
+                  [ngModelOptions]="{standalone: true}"
+                >
+                  <span class="help-block" *ngIf="titleControl.invalid && titleControl.touched">
+                    Title is required
+                  </span>
+              </div>
+
+              <div class="form-group input-effect"
+                [class.has-error]="titleControl.invalid && titleControl.touched"
+                [class.has-success]="titleControl.valid"
+              >
+                <label class="control-label">Mô tả</label>
+                
+                  <input required class="effect-16 from-control example-full-width" style="font-size: 16px;"
+                    #summayControl="ngModel"
+                    [(ngModel)]="_book.Summary" 
+                    [ngModelOptions]="{standalone: true}" 
+                  >
+                    <span class="help-block" *ngIf="summayControl.invalid && summayControl.touched">
+                      Summary is required
+                    </span>
+              </div>
+              
               <mat-form-field>
                 <mat-select placeholder="Chọn danh mục" [(ngModel)]="_book.CateID" [ngModelOptions]="{standalone: true}">
                   <mat-option *ngFor="let category of listCategory" [value]="category.CateID">
@@ -60,7 +86,7 @@
               <div class="row">
                 <button type="button" class="btn btn-danger btn-lg" (click)="OnBackClick()" style="font-size: 16px;">
                   <span class="glyphicon glyphicon-arrow-left"></span> Quay lại</button>
-                <button type="button" class="btn btn-success btn-lg" style="font-size: 16px;" (click)="onAddNewBook()">
+                <button type="button" class="btn btn-success btn-lg" style="font-size: 16px;" (click)="onAddNewBook(); OnSubmit();">
                   <span class="glyphicon glyphicon-arrow-right"></span> Tạo</button>
               </div>
 

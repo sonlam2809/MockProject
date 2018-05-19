@@ -22,7 +22,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class CategoryListComponent implements OnInit {
 
-  public selectedPageSize = 3;
+  public selectedPageSize = 5;
   public subscription: Subscription;
   public cate: Category[];
   public _cate: Category;
@@ -74,8 +74,8 @@ export class CategoryListComponent implements OnInit {
   // }
 
   //-------------------------------
-  public listItems: Array<number> = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+  public itemNumber: Array<number> = [
+    3, 5, 10, 15
   ];
   //-------------------------------
 
@@ -98,8 +98,9 @@ export class CategoryListComponent implements OnInit {
   onAddNewCategory() {
     this.categoryService.postCategory(this._cate).subscribe(x => {
       alert("Tạo mới danh mục thành công!");
-      this.router.navigateByUrl("/list-category");
       this.loadItems();
+      document.getElementById('exampleModalCenter').click();
+      this.router.navigateByUrl("/list-category");
     });
   }
 
@@ -159,7 +160,7 @@ export class CategoryListComponent implements OnInit {
 
   onChange(newValue) {
     this.selectedPageSize = newValue;
-    console.log("page size: " + this.selectedPageSize);
+    //console.log("page size: " + this.selectedPageSize);
     // ... do other stuff here ...
     this.loadItems();
   }

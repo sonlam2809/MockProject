@@ -16,17 +16,19 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
               <div class="row">
   
-                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                  <select class="btn btn-primary dropdown-toggle" [(ngModel)]="selectedPageSize" (change)="loadItems()">
-                    <option value="2">2 Rows</option>
-                    <option value="3">3 Rows</option>
-                    <option value="5">5 Rows</option>
-                    <option value="10">10 Rows</option>
-                    <option value="15">15 Rows</option>
-                    <option value="20">20 Rows</option>
-                    <option value="25">25 Rows</option>
-                  </select> 
-                </div>
+                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style=" padding-top: 10px;">
+                    <select class="form-control" 
+                      [(ngModel)]="selectedPageSize"   
+                      (change)="onChange(selectedPageSize); loadItems()" 
+                      style="font-size: 16px;"
+                      [ngModelOptions]="{standalone: true}">
+                      <option value="" disabled selected>Chọn kích thước</option>
+                      <option *ngFor="let item of itemNumber" [value]="item">
+                        {{item}} rows
+                      </option>
+                  
+                      </select>
+                  </div>
   
                 <!-- Search form -->
                 <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
@@ -48,23 +50,9 @@
             <!--Data grid tác giả-->
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-top: 10px">
   
-              <label class="k-form-field">
-                <input class="k-checkbox" type="checkbox" id="allowUnsort" [(ngModel)]="allowUnsort" />
-                <label class="k-checkbox-label" for="allowUnsort">
-                  {{ allowUnsort ? 'Disable': 'Enable' }} unsorting
-                </label>
-              </label>
-              <br/>
-              <label class="k-form-field">
-                <input class="k-checkbox" type="checkbox" id="multiple" [(ngModel)]="multiple" />
-                <label class="k-checkbox-label" for="multiple">
-                  {{ multiple ? 'Disable': 'Enable' }} multiple columns sorting
-                </label>
-              </label>
-  
               <kendo-grid 
                   [data]="gridView" 
-                  [height]="410" 
+                  [height]="600" 
                   
                   [pageSize]="selectedPageSize" [skip]="skip" 
                   [pageable]="true" 
@@ -116,18 +104,36 @@
               </div>
               <div class="modal-body">
   
-                <form action="" method="POST" role="form">
-                  <legend></legend>
-  
-                  <div class="form-group">
-                    <label for="">Tên nhà xuất bản</label>
-                    <input type="text" class="form-control" id="Name" placeholder="" [(ngModel)]="_publisher.Name" [ngModelOptions]="{standalone: true}">
-                    <label for="">Description</label>
-                    <input type="text" class="form-control" id="Description" placeholder="" [(ngModel)]="_publisher.Description" [ngModelOptions]="{standalone: true}">
+                <form #publisherForm="ngForm" (ngSubmit)="onAddNewPublisher()">
+
+                  <div class="form-group"
+                    [class.has-error]="publisherNameControl.invalid && publisherNameControl.touched"
+                    [class.has-success]="publisherNameControl.valid"
+                  >
+                    <label class="control-label">Tên nhà xuất bản</label>
+                    <input required type="text" #publisherNameControl="ngModel" class="form-control" id="Name" [(ngModel)]="_publisher.Name" [ngModelOptions]="{standalone: true}">
+                      <span class="help-block" *ngIf="publisherNameControl.invalid && publisherNameControl.touched">
+                        Full name is required
+                      </span>
+                  </div>
+                  <div class="form-group" 
+                    [class.has-error]="DescriptionControl.invalid && DescriptionControl.touched"
+                    [class.has-success]="DescriptionControl.valid"
+                  
+                  >
+                    <label class="control-label">Description</label>
+                    <input required type="text" #DescriptionControl="ngModel" class="form-control" id="Description" [(ngModel)]="_publisher.Description" [ngModelOptions]="{standalone: true}">
+                      <span class="help-block" *ngIf="DescriptionControl.invalid && DescriptionControl.touched">
+                        Description is required
+                      </span>
+
                   </div>
   
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onBackPublisherListClick()" style="font-size: 16px;">Quay lại</button>
-                  <button type="submit" class="btn btn-primary" style="font-size: 16px;" (click)="onAddNewPublisher()">Thêm</button>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onBackPublisherListClick()" style="font-size: 16px; background-color: rgb(238, 63, 63)">Quay lại</button>
+                    <button type="submit" [disabled]="publisherForm.invalid" class="btn btn-primary" style="font-size: 16px; background-color: rgb(21, 172, 121)" >Thêm</button>
+                  </div>
+                  
                 </form>
   
               </div>

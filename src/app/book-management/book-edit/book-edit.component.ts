@@ -94,7 +94,6 @@ export class BookEditComponent implements OnInit {
   }
 
   handleInputFile(file: FileList) {
-    console.log(Date.toString());
     this.fileToUpload = file.item(0);
 
     //link hinh moi de gui len server
@@ -130,7 +129,6 @@ export class BookEditComponent implements OnInit {
     }
 
   }
-
   onFileChange(e) {
     this.isOnFileChange = true;
   }

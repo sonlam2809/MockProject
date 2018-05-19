@@ -20,7 +20,8 @@ import { ShareDataService } from '../../services/share-data.service';
 })
 export class BookListComponent implements OnInit {
 
-  public selectedPageSize = 3;
+  public selectedPageSize = 5;
+  public itemNumber: Array<number> = new Array<number>(3, 5, 10, 15);
   public subscription: Subscription;
   public book: Book[];
   public _book: Book;
@@ -38,11 +39,8 @@ export class BookListComponent implements OnInit {
   }
 
   /* on change event combobox */
-
   onChange(newValue) {
     this.selectedPageSize = newValue;
-    console.log("page size: " + this.selectedPageSize);
-    // ... do other stuff here ...
     this.loadItems();
   }
 
