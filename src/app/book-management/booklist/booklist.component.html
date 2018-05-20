@@ -57,7 +57,7 @@
                   (pageChange)="pageChange($event)"
 
                   (edit)="editHandler($event)" 
-
+                  (remove)="removeHandler($event)"
                 >
                 <kendo-grid-column field="Title" title="Tựa sách" width="250">
                   </kendo-grid-column>
@@ -82,7 +82,7 @@
                       <button type="button" class="btn btn-info btn-circle btn-md" style="background-color: rgb(38, 202, 120)">
                         <i class="glyphicon glyphicon-option-vertical"></i>
                       </button>
-                      <button type="button" class="btn btn-danger btn-circle btn-md" >
+                      <button kendoGridRemoveCommand class="btn btn-danger btn-circle btn-md">
                         <i class="glyphicon glyphicon-remove"></i>
                       </button>
                     </ng-template>

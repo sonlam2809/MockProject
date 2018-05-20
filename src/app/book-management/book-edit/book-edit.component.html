@@ -76,7 +76,7 @@
               </div>
 
               <div class="row">
-                <input type="file" #Image accept="image/*" (change)="handleInputFile($event.target.files); onFileChange($event)" />
+                <input type="file" #Image accept="image/*" (change)="onFileChange($event); handleInputFile($event.target.files); " />
               </div>
               
             </form>

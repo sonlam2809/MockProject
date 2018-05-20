@@ -107,11 +107,12 @@ export class BookEditComponent implements OnInit {
     reader.readAsDataURL(this.fileToUpload);
   }
   onEditBook() {
-    if (typeof this.previewImageUrl !== 'undefined' && this.previewImageUrl) {
-      this.bookEdit.ImgUrl = "http://localhost:8964/Image/" + this.fileToUpload.name;
+    if (typeof this.previewImageUrl !== 'undefined' && this.previewImageUrl && this.isOnFileChange == false) {
+      this.bookEdit.ImgUrl = this.previewImageUrl;
     }
     this.bookService.updateBook(this.bookEdit.BookID, this.bookEdit).subscribe((x) => {
       alert("Cập nhật thành công");
+      this.router.navigateByUrl("/list-book");
     });
   }
 
@@ -119,7 +120,7 @@ export class BookEditComponent implements OnInit {
   OnSubmit(Image) {
     if (this.isOnFileChange) {
       console.log(this.previewImageUrl);
-      this.bookEdit.ImgUrl = this.previewImageUrl;
+      this.bookEdit.ImgUrl = "http://localhost:8964/Image/" + this.fileToUpload.name;
       this.bookService.postFile(this.fileToUpload).subscribe((x) => {
         //console.log("Doneeeeeeeeeeeee");
         Image.value = null;
@@ -127,7 +128,7 @@ export class BookEditComponent implements OnInit {
       });
       this.router.navigateByUrl("/list-book");
     }
-
+    console.log("Không có bấm choose file!!!");
   }
   onFileChange(e) {
     this.isOnFileChange = true;

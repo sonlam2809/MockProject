@@ -47,46 +47,118 @@
                       Summary is required
                     </span>
               </div>
+              <div class="form-group input-effect"
+                [class.has-error]="cateControl.invalid && cateControl.touched"
+                [class.has-success]="cateControl.valid"
+              >
+                <mat-form-field>
+                  <mat-select required #cateControl="ngModel" placeholder="Chọn danh mục" [(ngModel)]="_book.CateID" [ngModelOptions]="{standalone: true}">
+                    <mat-option *ngFor="let category of listCategory" [value]="category.CateID">
+                      {{category.CateName}}
+                    </mat-option>
+                  </mat-select>
+
+                  <span class="help-block" *ngIf="cateControl.invalid && cateControl.touched">
+                    Category is required
+                  </span>
+                </mat-form-field>
+              </div>
+              <div class="form-group input-effect"
+                [class.has-error]="authorControl.invalid && authorControl.touched"
+                [class.has-success]="authorControl.valid"
+              >
+                <mat-form-field>
+                  <mat-select required #authorControl="ngModel" placeholder="Chọn tác giả" [(ngModel)]="_book.AuthorID" [ngModelOptions]="{standalone: true}">
+                    <mat-option *ngFor="let author of listAuthor" [value]="author.AuthorID">
+                      {{author.AuthorName}}
+                    </mat-option>
+                  </mat-select>
+
+                  <span class="help-block" *ngIf="authorControl.invalid && authorControl.touched">
+                    Author is required
+                  </span>
+                </mat-form-field>
+              </div>
+              <div class="form-group input-effect"
+                [class.has-error]="publisherControl.invalid && publisherControl.touched"
+                [class.has-success]="publisherControl.valid"
+              >
+                <mat-form-field>
+                  <mat-select required #publisherControl="ngModel" placeholder="Chọn nhà xuất bản" [(ngModel)]="_book.PubID" [ngModelOptions]="{standalone: true}">
+                    <mat-option *ngFor="let publisher of listPublisher" [value]="publisher.PubID">
+                      {{publisher.Name}}
+                    </mat-option>
+                  </mat-select>
+
+                  <span class="help-block" *ngIf="publisherControl.invalid && publisherControl.touched">
+                    Author is required
+                  </span>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group input-effect"
+                [class.has-error]="PriceControl.invalid && PriceControl.touched"
+                [class.has-success]="PriceControl.valid"
+              >
+                <label class="control-label">Giá</label>
               
-              <mat-form-field>
-                <mat-select placeholder="Chọn danh mục" [(ngModel)]="_book.CateID" [ngModelOptions]="{standalone: true}">
-                  <mat-option *ngFor="let category of listCategory" [value]="category.CateID">
-                    {{category.CateName}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-              <mat-form-field>
-                <mat-select placeholder="Chọn tác giả" [(ngModel)]="_book.AuthorID" [ngModelOptions]="{standalone: true}">
-                  <mat-option *ngFor="let author of listAuthor" [value]="author.AuthorID">
-                    {{author.AuthorName}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-              <mat-form-field>
-                <mat-select placeholder="Chọn nhà xuất bản" [(ngModel)]="_book.PubID" [ngModelOptions]="{standalone: true}">
-                  <mat-option *ngFor="let publisher of listPublisher" [value]="publisher.PubID">
-                    {{publisher.Name}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="Giá" value="" [(ngModel)]="_book.Price" [ngModelOptions]="{standalone: true}">
-              </mat-form-field>
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="Số lượng" value="" [(ngModel)]="_book.Quantity" [ngModelOptions]="{standalone: true}">
-              </mat-form-field>
-              <mat-form-field>
-                <mat-select placeholder="Trạng thái" [(ngModel)]="_book.BookStatusID" [ngModelOptions]="{standalone: true}">
-                  <mat-option *ngFor="let bookstatus of listBookStatus" [value]="bookstatus.BookStatusID">
-                    {{bookstatus.BookStatus}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
+                <input required class="effect-16 from-control example-full-width" style="font-size: 16px;"
+                  #PriceControl="ngModel"
+                  [(ngModel)]="_book.Price" 
+                  [ngModelOptions]="{standalone: true}" 
+                  pattern="[0-9]*"
+                >
+                  <span class="help-block" *ngIf="PriceControl.invalid && PriceControl.touched">
+                    Price is required
+                  </span>
+                  <div [hidden]="PriceControl.valid || PriceControl.pristine"
+                    class="help-block">
+                    <div [hidden]="!PriceControl.hasError('pattern')">Price should be only numbers</div>
+                  </div>
+              </div>
+
+              <div class="form-group input-effect"
+                [class.has-error]="QuantityControl.invalid && QuantityControl.touched"
+                [class.has-success]="QuantityControl.valid"
+              >
+                <label class="control-label">Số lượng</label>
+            
+                <input required class="effect-16 from-control example-full-width" style="font-size: 16px;"
+                  #QuantityControl="ngModel"
+                  [(ngModel)]="_book.Quantity" 
+                  [ngModelOptions]="{standalone: true}" 
+                  pattern="[0-9]*"
+                >
+                  <span class="help-block" *ngIf="QuantityControl.invalid && QuantityControl.touched">
+                    Quantity is required
+                  </span>
+                  <div [hidden]="QuantityControl.valid || QuantityControl.pristine"
+                    class="help-block">
+                    <div [hidden]="!QuantityControl.hasError('pattern')">Quantity should be only numbers</div>
+                  </div>
+              </div>
+
+              <div class="form-group input-effect"
+                [class.has-error]="bookStatusControl.invalid && bookStatusControl.touched"
+                [class.has-success]="bookStatusControl.valid"
+              >
+                <mat-form-field>
+                  <mat-select required #bookStatusControl="ngModel" placeholder="Trạng thái" [(ngModel)]="_book.BookStatusID" [ngModelOptions]="{standalone: true}">
+                    <mat-option *ngFor="let bookstatus of listBookStatus" [value]="bookstatus.BookStatusID">
+                      {{bookstatus.BookStatus}}
+                    </mat-option>
+                  </mat-select>
+
+                  <span class="help-block" *ngIf="bookStatusControl.invalid && bookStatusControl.touched">
+                    Book Status is required
+                  </span>
+                </mat-form-field>
+              </div>
 
               <div class="row">
                 <button type="button" class="btn btn-danger btn-lg" (click)="OnBackClick()" style="font-size: 16px;">
                   <span class="glyphicon glyphicon-arrow-left"></span> Quay lại</button>
-                <button type="button" class="btn btn-success btn-lg" style="font-size: 16px;" (click)="onAddNewBook(); OnSubmit();">
+                <button type="button" class="btn btn-success btn-lg" [disabled]="addBookForm.invalid" style="font-size: 16px;" (click)="onAddNewBook(); OnSubmit();">
                   <span class="glyphicon glyphicon-arrow-right"></span> Tạo</button>
               </div>
 

@@ -26,12 +26,12 @@ export class BookListComponent implements OnInit {
   public book: Book[];
   public _book: Book;
 
+
   //kendo grid data
   public gridView: GridDataResult;
 
   constructor(private router: Router, public bookService: BookService, private shareDataService: ShareDataService) {
     this._book = new Book();
-
   }
 
   ngOnInit() {
@@ -82,10 +82,16 @@ export class BookListComponent implements OnInit {
     //console.log("this.sharedataservice........"+this.shareDataService.book.PubID);
   }
 
-  /* Remove book */
-  // RemoveBook(bookID: number): Observable<Book>{
-  //   return this.bookService.removeBook(bookID).subscribe
-  // }
+  public removeHandler({ dataItem }){
+    console.log("Removed book: "+ dataItem.BookID);
+    console.log("Removed book: "+ dataItem);
+    this.bookService.removeBook(dataItem.BookID, dataItem).subscribe((x)=>{
+      alert("Xóa sách thành công!");
+      this.loadItems();
+      this.router.navigateByUrl("/list-book");
+    });
+  }
+
 
 }
 

@@ -63,8 +63,9 @@ export class BookService {
     return this.httpClient.post(this.API + "/UploadImage", formData);
   }
 
-  removeBook(bookId: number){
-    return this.http.get(this.API + "/Remove/" + bookId).map((res: Response) => res.json());
+  removeBook(bookId: number, book: Book){
+    return this.httpClient.post(this.API + "/Remove/" + bookId, book);
   }
+
 
 }
