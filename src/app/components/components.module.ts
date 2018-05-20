@@ -5,6 +5,9 @@ import { RouterModule } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { RegisterComponent } from './register/register.component';
+import { FormsModule } from '@angular/forms';
+import { ConfirmEqualValidatorDirective } from './register/confirm-equal-validator.directive';
 
 
 
@@ -12,12 +15,15 @@ import { SidebarComponent } from './sidebar/sidebar.component';
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule,
+    
   ],
   declarations: [
     FooterComponent,
     NavbarComponent,
     SidebarComponent,
-   
+    RegisterComponent,
+    ConfirmEqualValidatorDirective,
    
   ],
   exports: [
