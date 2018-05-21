@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../model/user';
 import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
+import { FormGroup, FormControl } from '@angular/forms';
 
 
 @Component({
@@ -10,36 +12,34 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  
+  invalidCredentialMsg: string;
 
-  public listUser: User[];
+  ngOnInit(){
 
-  public checkUser: User;
-
-  constructor(public urlRouter:Router, public userService: UserService) { 
-
-    this.checkUser = new User();
   }
-
-  ngOnInit() {
-    this.userService.getUsers().subscribe((x)=>{
-      //console.log(x);
-      this.listUser = x;
-    });
-    console.log(this.listUser);
+  
+  constructor(private authService: AuthService, private router: Router) {
   }
-  public Login()
-  {
-    for(let i = 0; i< this.listUser.length; i++)
-    {
-      if(this.listUser[i].UserName == this.checkUser.UserName && this.listUser[i].Password == this.checkUser.Password)
-      {
-        this.urlRouter.navigate(['/dashboard']);
+  loginForm = new FormGroup({
+    username: new FormControl(),
+    password: new FormControl()
+  });
+
+  onFormSubmit() {
+    let uname = this.loginForm.get('username').value;
+    let pwd = this.loginForm.get('password').value;
+    this.authService.isUserAuthenticated(uname, pwd).subscribe(
+      authenticated => {
+        if (authenticated) {
+          let url = this.authService.getRedirectUrl();
+          console.log('Redirect Url:' + url);
+          this.router.navigate([url]);
+        } else {
+          this.invalidCredentialMsg = 'Invalid Credentials. Try again.';
+        }
       }
-      
-    }
-    
-    
-
+    );
   }
 
 }

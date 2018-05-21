@@ -23,50 +23,10 @@ import { AuthorListComponent } from '../../author-management/author-list/author-
 
 import { BookListComponent } from '../../book-management/booklist/booklist.component';
 import { BookEditComponent } from '../../book-management/book-edit/book-edit.component';
+import { PageNotFoundComponent } from '../../page-not-found/page-not-found.component';
 
 export const AdminLayoutRoutes: Routes = [
-    // {
-    //   path: '',
-    //   children: [ {
-    //     path: 'dashboard',
-    //     component: DashboardComponent
-    // }]}, {
-    // path: '',
-    // children: [ {
-    //   path: 'userprofile',
-    //   component: UserProfileComponent
-    // }]
-    // }, {
-    //   path: '',
-    //   children: [ {
-    //     path: 'icons',
-    //     component: IconsComponent
-    //     }]
-    // }, {
-    //     path: '',
-    //     children: [ {
-    //         path: 'notifications',
-    //         component: NotificationsComponent
-    //     }]
-    // }, {
-    //     path: '',
-    //     children: [ {
-    //         path: 'maps',
-    //         component: MapsComponent
-    //     }]
-    // }, {
-    //     path: '',
-    //     children: [ {
-    //         path: 'typography',
-    //         component: TypographyComponent
-    //     }]
-    // }, {
-    //     path: '',
-    //     children: [ {
-    //         path: 'upgrade',
-    //         component: UpgradeComponent
-    //     }]
-    // }
+
     { path: 'dashboard', component: DashboardComponent },
     { path: 'list-book', component: BookListComponent },
     { path: 'logout', component: MapsComponent },
@@ -75,22 +35,10 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'add-new-book', component: AddNewBookComponent },
     { path: 'list-author', component: AuthorListComponent },
     { path: 'list-publisher', component: PublisherListComponent },
+    { path: 'list-category', component: CategoryListComponent},
     {
-        path: 'list-category', component: CategoryListComponent,
-        // children: [
-        //     {
-        //         path: ':id/edit',
-        //         component: CategoryEditComponent
-        //     },
-        //     {
-        //         path: '',
-        //         component: CategoryListComponent
-        //     },
-        //     {
-        //         path: 'list-category',
-        //         component: CategoryEditComponent
-        //     }
-        // ]
-    },
+        path: '**',
+        component: PageNotFoundComponent 
+    },	
     { path: 'edit-book', component: BookEditComponent },
 ];

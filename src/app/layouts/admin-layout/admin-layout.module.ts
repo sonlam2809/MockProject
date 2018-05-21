@@ -54,6 +54,7 @@ import { BookListComponent } from '../../book-management/booklist/booklist.compo
 //import { ShareDataService } from '../../services/share-data.service';
 import { BookEditComponent } from '../../book-management/book-edit/book-edit.component';
 import { UserService } from '../../services/user.service';
+import { PageNotFoundComponent } from '../../page-not-found/page-not-found.component';
 
 @NgModule({
   imports: [
@@ -101,6 +102,8 @@ import { UserService } from '../../services/user.service';
 
     BookListComponent,
     BookEditComponent,
+
+    PageNotFoundComponent,
     
   ],
   providers: [

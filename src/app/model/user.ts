@@ -5,3 +5,4 @@ export class User {
     IsActive: boolean;
     ConfirmPassword: string;
 }
+    //"ejected": true

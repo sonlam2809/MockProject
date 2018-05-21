@@ -1,6 +1,6 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
@@ -25,6 +25,8 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { LoginComponent } from './components/login/login.component';
 import { UserService } from './services/user.service';
 import { ShareService } from './services/share.service';
+import { AuthService } from './services/auth.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 
 @NgModule({
@@ -38,19 +40,19 @@ import { ShareService } from './services/share.service';
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
     }),
-
+    ReactiveFormsModule,
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
-    
-    
+     
   ],
   providers: [
     UserService,
     ShareService,
-    
+    AuthService,
+    AuthGuardService,
   ],
   bootstrap: [AppComponent]
 })
