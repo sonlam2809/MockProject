@@ -8,6 +8,7 @@ import { Category } from '../../model/category';
 import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { SortDescriptor, orderBy, State } from '@progress/kendo-data-query';
 import { Observable } from 'rxjs/Observable';
+import { error } from 'util';
 
 
 
@@ -26,6 +27,8 @@ export class CategoryListComponent implements OnInit {
   public subscription: Subscription;
   public cate: Category[];
   public _cate: Category;
+
+  public loading: boolean;
 
   /* for sorting */
   public multiple = false;
@@ -107,10 +110,16 @@ export class CategoryListComponent implements OnInit {
   /* delete a category */
   onClickDeleteCategory(cateId: string) {
     this.categoryService.deleteCategory(cateId).subscribe((x) => {
-      console.log(x);
-      this.loadItems();
+      //console.log(x);
+      
       alert("Xóa danh mục thành công!");
-    });
+    },
+    error =>{
+      alert("Xóa danh mục thất bại");
+    }
+    
+  );
+    this.loadItems();
   }
 
 
@@ -179,12 +188,13 @@ export class CategoryListComponent implements OnInit {
     this.loadItems();
   }
   private loadItems(): void {
-
+    this.loading = true;
     this.categoryService.getCategoryPage(this.currentPage, this.selectedPageSize, this.searchText).subscribe((x) => {
       this.gridView = {
         data: x["category"],
         total: x["total"]
-      }
+      },
+      this.loading = false;
     });
   }
 

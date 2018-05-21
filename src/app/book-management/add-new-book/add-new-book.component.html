@@ -102,7 +102,7 @@
               >
                 <label class="control-label">Giá</label>
               
-                <input required class="effect-16 from-control example-full-width" style="font-size: 16px;"
+                <input required type="number" class="effect-16 from-control example-full-width" style="font-size: 16px;"
                   #PriceControl="ngModel"
                   [(ngModel)]="_book.Price" 
                   [ngModelOptions]="{standalone: true}" 
@@ -123,7 +123,7 @@
               >
                 <label class="control-label">Số lượng</label>
             
-                <input required class="effect-16 from-control example-full-width" style="font-size: 16px;"
+                <input required type="number" class="effect-16 from-control example-full-width" style="font-size: 16px;"
                   #QuantityControl="ngModel"
                   [(ngModel)]="_book.Quantity" 
                   [ngModelOptions]="{standalone: true}" 

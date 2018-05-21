@@ -53,6 +53,7 @@ import { BookListModule } from '../../book-management/booklist/book-list.module'
 import { BookListComponent } from '../../book-management/booklist/booklist.component';
 //import { ShareDataService } from '../../services/share-data.service';
 import { BookEditComponent } from '../../book-management/book-edit/book-edit.component';
+import { UserService } from '../../services/user.service';
 
 @NgModule({
   imports: [
@@ -108,7 +109,6 @@ import { BookEditComponent } from '../../book-management/book-edit/book-edit.com
     PublisherService,
     ShareService,
     BookService,
-    
   ]
 })
 

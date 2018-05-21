@@ -10,6 +10,7 @@ import { SortDescriptor, orderBy, State } from '@progress/kendo-data-query';
 import { Observable } from 'rxjs/Observable';
 import { AuthorService } from '../../services/author.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { error } from 'util';
 
 
 
@@ -25,6 +26,8 @@ export class AuthorListComponent implements OnInit {
     public itemNumber: Array<number> = [3, 5, 10, 15];
     public author: Author[];
     public _author: Author;
+
+    public loading: boolean;
 
     //kendo grid data
     public gridView: GridDataResult;
@@ -56,10 +59,15 @@ export class AuthorListComponent implements OnInit {
     /* delete a category */
     onClickDeleteAuthor(authorId: string) {
         this.authorService.deleteAuthor(authorId).subscribe((x) => {
-            console.log(x);
-            this.loadItems();
+            //console.log(x);
+            
             alert("Xóa tác giả thành công!");
-        });
+        },
+        error=>{
+            alert("Xóa tác giả thất bại!")
+        }
+    );
+        this.loadItems();
     }
 
     public editDataItem: Author;
@@ -112,12 +120,13 @@ export class AuthorListComponent implements OnInit {
 
     /* Load tac gia theo pagenumber, pagesize and search name */
     private loadItems(): void {
-
+        this.loading = true;
         this.authorService.getAuthorPage(this.currentPage, this.selectedPageSize, this.searchText).subscribe((x) => {
             this.gridView = {
                 data: x["author"],
                 total: x["total"]
-            }
+            },
+            this.loading = false;
         });
     }
 

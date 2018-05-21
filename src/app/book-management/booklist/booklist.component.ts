@@ -26,6 +26,8 @@ export class BookListComponent implements OnInit {
   public book: Book[];
   public _book: Book;
 
+  public loading: boolean;
+
 
   //kendo grid data
   public gridView: GridDataResult;
@@ -54,11 +56,13 @@ export class BookListComponent implements OnInit {
     this.loadItems();
   }
   private loadItems(): void {
+    this.loading = true;
     this.bookService.getBookPage(this.currentPage, this.selectedPageSize, this.searchText).subscribe((x) => {
       this.gridView = {
         data: x["book"],
         total: x["total"]
-      }
+      },
+      this.loading = false;
     });
   }
 

@@ -52,7 +52,8 @@
   
               <kendo-grid 
                   [data]="gridView" 
-                  [height]="600" 
+                  [height]="600"
+                  [loading]="loading" 
                   
                   [pageSize]="selectedPageSize" [skip]="skip" 
                   [pageable]="true" 
@@ -63,7 +64,7 @@
                 >
                 <kendo-grid-column field="Name" title="Tên nhà xuất bản" width="300">
                 </kendo-grid-column>
-                <kendo-grid-column field="Description" title="History" width="">
+                <kendo-grid-column field="Description" title="Description" width="">
                 </kendo-grid-column>
                 <kendo-grid-column field="Discontinued" title="" width="300">
                   <ng-template kendoGridCellTemplate let-dataItem>

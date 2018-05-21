@@ -25,6 +25,8 @@ export class PublisherListComponent implements OnInit {
     public publisher: Publisher[];
     public _publisher: Publisher;
 
+    public loading: boolean;
+
     //kendo grid data
     public gridView: GridDataResult;
 
@@ -55,10 +57,15 @@ export class PublisherListComponent implements OnInit {
     /* delete a publisher */
     onClickDeletePublisher(pubId: string) {
         this.pubService.deletePublisher(pubId).subscribe((x) => {
-            console.log(x);
-            this.loadItems();
+            //console.log(x);
+            
             alert("Xóa nhà xuất bản thành công!");
-        });
+        },
+        error=>{
+            alert("Xóa nhà xuất bản thất bại!")
+        }
+    );
+        this.loadItems();
     }
 
     public editDataItem: Publisher;
@@ -111,12 +118,13 @@ export class PublisherListComponent implements OnInit {
 
     /* Load nha xuat ban theo pagenumber, pagesize and search name */
     private loadItems(): void {
-
+        this.loading = true;
         this.pubService.getPublisherPage(this.currentPage, this.selectedPageSize, this.searchText).subscribe((x) => {
             this.gridView = {
                 data: x["publisher"],
                 total: x["total"]
-            }
+            },
+            this.loading = false;
         });
     }
 
