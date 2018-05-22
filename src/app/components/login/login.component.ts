@@ -14,6 +14,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class LoginComponent implements OnInit {
   
   invalidCredentialMsg: string;
+  isLogin: boolean = false;
 
   ngOnInit(){
 
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
   });
 
   onFormSubmit() {
+    this.isLogin = true;
     let uname = this.loginForm.get('username').value;
     let pwd = this.loginForm.get('password').value;
     this.authService.isUserAuthenticated(uname, pwd).subscribe(
@@ -35,10 +37,14 @@ export class LoginComponent implements OnInit {
           let url = this.authService.getRedirectUrl();
           console.log('Redirect Url:' + url);
           this.router.navigate([url]);
+          
         } else {
           this.invalidCredentialMsg = 'Invalid Credentials. Try again.';
+          
         }
-      }
+        this.isLogin = false;  
+      },
+      
     );
   }
 

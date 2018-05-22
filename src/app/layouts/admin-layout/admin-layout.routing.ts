@@ -24,6 +24,8 @@ import { AuthorListComponent } from '../../author-management/author-list/author-
 import { BookListComponent } from '../../book-management/booklist/booklist.component';
 import { BookEditComponent } from '../../book-management/book-edit/book-edit.component';
 import { PageNotFoundComponent } from '../../page-not-found/page-not-found.component';
+import { RegisterComponent } from '../../components/register/register.component';
+
 
 export const AdminLayoutRoutes: Routes = [
 
@@ -35,10 +37,17 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'add-new-book', component: AddNewBookComponent },
     { path: 'list-author', component: AuthorListComponent },
     { path: 'list-publisher', component: PublisherListComponent },
-    { path: 'list-category', component: CategoryListComponent},
+    { path: 'list-category', component: CategoryListComponent },
+    {
+        path: 'register',
+        component: RegisterComponent,
+    },
+    { path: 'edit-book', component: BookEditComponent },
     {
         path: '**',
-        component: PageNotFoundComponent 
-    },	
-    { path: 'edit-book', component: BookEditComponent },
+        component: PageNotFoundComponent
+    },
+
+
+
 ];

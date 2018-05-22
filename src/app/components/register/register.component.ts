@@ -25,7 +25,12 @@ export class RegisterComponent implements OnInit {
       Password: '',
       Email: '',
       IsActive: true,
-      ConfirmPassword: ''
+      ConfirmPassword: '',
     }
+  }
+
+  /* Save new user */
+  onSaveUser(){
+    
   }
 }

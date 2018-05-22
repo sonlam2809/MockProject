@@ -55,6 +55,7 @@ import { BookListComponent } from '../../book-management/booklist/booklist.compo
 import { BookEditComponent } from '../../book-management/book-edit/book-edit.component';
 import { UserService } from '../../services/user.service';
 import { PageNotFoundComponent } from '../../page-not-found/page-not-found.component';
+import { RegisterComponent } from '../../components/register/register.component';
 
 @NgModule({
   imports: [
@@ -104,6 +105,8 @@ import { PageNotFoundComponent } from '../../page-not-found/page-not-found.compo
     BookEditComponent,
 
     PageNotFoundComponent,
+    RegisterComponent
+
     
   ],
   providers: [

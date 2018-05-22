@@ -7,6 +7,7 @@ import { CategoryService } from '../../services/category.service';
 import { AuthorService } from '../../services/author.service';
 import { PublisherService } from '../../services/publisher.service';
 import { GridDataResult } from '@progress/kendo-angular-grid';
+import { error } from 'util';
 
 @Component({
   selector: 'app-add-new-book',
@@ -22,6 +23,7 @@ export class AddNewBookComponent implements OnInit {
 
   public imgUrl: string = "http://placehold.it/500";
   public fileToUpload: File = null;
+  public isOnFileChange: boolean = false;
 
   public _book: Book;
 
@@ -93,7 +95,7 @@ export class AddNewBookComponent implements OnInit {
 
 
   OnSubmit(Image){
-    console.log("Nhay vao ham nay Doneeeeeeeeeeeee");
+    ///console.log("Nhay vao ham nay Doneeeeeeeeeeeee");
     this.bookService.postFile(this.fileToUpload).subscribe((x)=>{
       //Image.value = null;
       this.imgUrl = "http://placehold.it/500";
@@ -102,15 +104,25 @@ export class AddNewBookComponent implements OnInit {
 
   /* add new book */
   onAddNewBook() {
+    if(this.isOnFileChange == false){
+      this._book.ImgUrl = this.imgUrl;
+    }
     this.bookService.postBook(this._book).subscribe(x => {
       alert("Thêm mới sách thành công!");
       this.router.navigateByUrl("/list-book");
-    });
+    },
+    error => {
+      alert("Thêm mới sách thất bại!");
+      this.router.navigateByUrl("/list-book");
+    }
+  );
   }
 
   // testaa(){
   //   console.log(this._book.CateID);
   // }
-
+  onFileChange(e) {
+    this.isOnFileChange = true;
+  }
 
 }

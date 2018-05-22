@@ -17,28 +17,21 @@
             <div class="row">
 
               <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style=" padding-top: 10px;">
-                <select class="form-control" 
-                  [(ngModel)]="selectedPageSize"   
-                  (change)="onChange(selectedPageSize); loadItems()" 
-                  style="font-size: 16px;"
-                  [ngModelOptions]="{standalone: true}"
-                >
+                <select class="form-control" [(ngModel)]="selectedPageSize"   (change)="onChange(selectedPageSize); loadItems()" style="font-size: 16px;"
+                  [ngModelOptions]="{standalone: true}">
                   <option value="" disabled selected>Chọn kích thước</option>
                   <option *ngFor="let item of itemNumber" [value]="item">
                     {{item}} rows
                   </option>
-              
+
                   </select>
               </div>
 
               <!-- Search form -->
               <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                 <form class="form-inline md-form form-sm">
-                  <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search" 
-                    [(ngModel)]="searchText" 
-                    (keyup.enter)="SearchEnter()"
-                    [ngModelOptions]="{standalone: true}"
-                  >
+                  <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search" [(ngModel)]="searchText"
+                    (keyup.enter)="SearchEnter()" [ngModelOptions]="{standalone: true}">
                   <i class="fa fa-search" aria-hidden="true"></i>
                 </form>
               </div>
@@ -50,18 +43,8 @@
           <!--Data grid danh mục-->
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-top: 10px">
 
-            <kendo-grid 
-                [data]="gridView" 
-                [height]="600"
-                [loading]="loading"
-                
-                [pageSize]="selectedPageSize" [skip]="skip" 
-                [pageable]="true" 
-                (pageChange)="pageChange($event)"
-                
-                (edit)="editHandler($event)" (remove)="removeHandler($event)"
-                (add)="addHandler($event)"
-            >
+            <kendo-grid [data]="gridView" [height]="600" [loading]="loading" [pageSize]="selectedPageSize" [skip]="skip" [pageable]="true"
+              (pageChange)="pageChange($event)" (edit)="editHandler($event)" (remove)="removeHandler($event)" (add)="addHandler($event)">
               <kendo-grid-column field="CateName" title="Tên danh mục" width="300">
               </kendo-grid-column>
               <kendo-grid-column field="Description" title="Description" width="">
@@ -103,26 +86,23 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
+            <form #categoryForm="ngForm" (ngSubmit)="onAddNewCategory()">
+              <div class="modal-body">
 
-              <form #categoryForm="ngForm" (ngSubmit)="onAddNewCategory()">
+                <!-- <form #categoryForm="ngForm" (ngSubmit)="onAddNewCategory()"> -->
 
-                <div class="form-group"
-                  [class.has-error]="authorNameControl.invalid && authorNameControl.touched"
-                  [class.has-success]="authorNameControl.valid"
-                >
+                <div class="form-group" [class.has-error]="categoryNameControl.invalid && categoryNameControl.touched" [class.has-success]="categoryNameControl.valid">
                   <label class="control-label">Tên danh mục</label>
-                  <input required type="text" #authorNameControl="ngModel" class="form-control" id="categoryName" [(ngModel)]="_cate.CateName" [ngModelOptions]="{standalone: true}">
-                    <span class="help-block" *ngIf="authorNameControl.invalid && authorNameControl.touched">
-                      Category name is required
-                    </span>
+                  <input type="text" #categoryNameControl="ngModel" class="form-control" id="categoryName" ngModel [(ngModel)]="_cate.CateName"
+                    [ngModelOptions]="{standalone: true}" required>
+                  <span class="help-block" *ngIf="categoryNameControl.invalid && categoryNameControl.touched">
+                    Category name is required
+                  </span>
                 </div>
-                <div class="form-group" 
-                  [class.has-error]="DescriptionControl.invalid && DescriptionControl.touched"
-                  [class.has-success]="DescriptionControl.valid"  
-                >
+                <div class="form-group" [class.has-error]="DescriptionControl.invalid && DescriptionControl.touched" [class.has-success]="DescriptionControl.valid">
                   <label class="control-label">Description</label>
-                  <input required type="text" #DescriptionControl="ngModel" class="form-control" id="categoryDescription" [(ngModel)]="_cate.Description" [ngModelOptions]="{standalone: true}">
+                  <input type="text" #DescriptionControl="ngModel" class="form-control" id="categoryDescription" ngModel [(ngModel)]="_cate.Description"
+                    [ngModelOptions]="{standalone: true}" required>
                   <span class="help-block" *ngIf="DescriptionControl.invalid && DescriptionControl.touched">
                     Description is required
                   </span>
@@ -130,12 +110,13 @@
 
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onBackCategoryListClick()" style="font-size: 16px; background-color: rgb(238, 63, 63)">Quay lại</button>
-                  <button type="submit" ng-disabled="categoryForm.$invalid" class="btn btn-primary" style="font-size: 16px; background-color: rgb(21, 172, 121)" >Thêm</button>
+                  <button type="submit" class="btn btn-primary" style="font-size: 16px; background-color: rgb(21, 172, 121)" [disabled]="categoryForm.invalid">Thêm</button>
                 </div>
-                
-              </form>
 
-            </div>
+                <!-- </form> -->
+
+              </div>
+            </form>
             <!-- <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                       <button type="button" class="btn btn-primary">Save changes</button>
@@ -148,9 +129,5 @@
 </div>
 
 <!--Popup edit category-->
-<category-edit 
-  [model]="editDataItem" 
-  [isNew]="isNew" 
-  (save)="saveHandler($event)" 
-  (cancel)="cancelHandler()">
+<category-edit [model]="editDataItem" [isNew]="isNew" (save)="saveHandler($event)" (cancel)="cancelHandler()">
 </category-edit>

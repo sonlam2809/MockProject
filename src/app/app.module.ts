@@ -27,6 +27,7 @@ import { UserService } from './services/user.service';
 import { ShareService } from './services/share.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
+//import { RegisterComponent } from './components/register/register.component';
 
 
 @NgModule({
@@ -46,7 +47,7 @@ import { AuthGuardService } from './services/auth-guard.service';
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
-     
+    //RegisterComponent,
   ],
   providers: [
     UserService,

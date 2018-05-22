@@ -9,12 +9,17 @@ import "rxjs/add/operator/map";
 export class UserService {
 
   private API: string = 'http://localhost:8964/api/Users';
-  constructor(public http: Http, public share: ShareService) { 
+  constructor(public http: Http, public share: ShareService) {
 
   }
 
   /* get Users */
-  getUsers(): Observable<User[]>{
+  getUsers(): Observable<User[]> {
     return this.http.get(this.API).map((res: Response) => res.json());
+  }
+
+  /* add new user */
+  postUser(user: User): Observable<User> {
+    return this.share.post<User>(this.API, user);
   }
 }

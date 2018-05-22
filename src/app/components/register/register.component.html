@@ -24,7 +24,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<h1>Bubble SignUp Form</h1>
 		<div class="main-agileinfo">
 			<div class="agileits-top"> 
-				<form action="#" method="post" novalidate #registrationForm="ngForm"> 
+				<form novalidate #registrationForm="ngForm" (ngSubmit)="onSaveUser()"> 
           <div class="form-group"
             [class.has-error]="userName.invalid && userName.touched"
             [class.has-success]="userName.valid"
@@ -84,7 +84,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						</label>  
 						<div class="clear"> </div>
 					</div>   
-					<input type="submit" value="SIGNUP" [disabled]="registrationForm.form.invalid">
+					<button type="submit" value="SIGNUP" [disabled]="registrationForm.form.invalid"></button>
 				</form>
 				<p>Don't have an Account? <a href="#"> Login Now!</a></p>
 			</div>	 

@@ -26,6 +26,7 @@
                   #titleControl="ngModel"
                   [(ngModel)]="_book.Title" 
                   [ngModelOptions]="{standalone: true}"
+                  required
                 >
                   <span class="help-block" *ngIf="titleControl.invalid && titleControl.touched">
                     Title is required
@@ -107,6 +108,7 @@
                   [(ngModel)]="_book.Price" 
                   [ngModelOptions]="{standalone: true}" 
                   pattern="[0-9]*"
+                  min="0"
                 >
                   <span class="help-block" *ngIf="PriceControl.invalid && PriceControl.touched">
                     Price is required
@@ -128,6 +130,7 @@
                   [(ngModel)]="_book.Quantity" 
                   [ngModelOptions]="{standalone: true}" 
                   pattern="[0-9]*"
+                  min="0"
                 >
                   <span class="help-block" *ngIf="QuantityControl.invalid && QuantityControl.touched">
                     Quantity is required
@@ -171,7 +174,7 @@
               </div>
 
               <div class="row">
-                <input type="file" #Image accept="image/*" (change)="handleInputFile($event.target.files);" />
+                <input type="file" #Image accept="image/*" (change)="onFileChange($event); handleInputFile($event.target.files);" />
               </div>
               <div class="row">
                 <button type="Submit" class="btn btn-sm btn-default" [disabled]="Image.value==''" style="font-size: 16px; background-color: rgb(15, 153, 107);">Submit</button>

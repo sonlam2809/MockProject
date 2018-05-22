@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
+//import { RegisterComponent } from './components/register/register.component';
 import { AuthGuardService } from './services/auth-guard.service';
 
 
@@ -30,10 +30,7 @@ const routes: Routes = [
       }
     ]
   },
-  {
-    path: 'register',
-    component: RegisterComponent,
-  },
+
 
 ];
 
